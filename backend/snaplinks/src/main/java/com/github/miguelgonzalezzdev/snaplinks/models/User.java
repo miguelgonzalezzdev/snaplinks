@@ -1,5 +1,6 @@
 package com.github.miguelgonzalezzdev.snaplinks.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,6 +38,12 @@ public class User {
     // Relationship with tokens
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Token> tokens;
+
+    // Relationship with tokens
+    //@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<ShortUrl> shortUrls;
 
     // ============ Getters & Setters ============
     public UUID getId() {
