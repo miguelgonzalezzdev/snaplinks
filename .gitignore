@@ -7,8 +7,8 @@ HELP.md
 Thumbs.db
 
 # Application properties / env
-/application.properties
-/application.yml
+**/application.properties
+**/application.yml
 **/.env*
 **/.env
 .env
