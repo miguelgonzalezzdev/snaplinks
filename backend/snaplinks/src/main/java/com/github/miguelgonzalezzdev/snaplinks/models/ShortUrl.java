@@ -24,7 +24,7 @@ public class ShortUrl {
     @Column(length = 255)
     private String name;
 
-    @Column(name = "short_code", nullable = false, length = 10)
+    @Column(name = "short_code", nullable = false, unique = true, length = 10)
     private String shortCode;
 
     @Column(name = "original_url", nullable = false)
@@ -36,8 +36,7 @@ public class ShortUrl {
     @Column(name = "expires_at")
     private LocalDateTime expiresAt;
 
-    @Lob
-    @Column(name = "qr_code")
+    @Column(name = "qr_code", columnDefinition = "TEXT")
     private String qrCode;
 
     // Relationship with users

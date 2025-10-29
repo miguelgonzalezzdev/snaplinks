@@ -9,6 +9,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface ShortUrlRepository extends JpaRepository<ShortUrl, Long> {
+    Optional<ShortUrl> findByShortCode(String shortCode);
     List<ShortUrl> findAllByUserIdAndExpiresAtIsNullOrUserIdAndExpiresAtAfter(UUID userId1, UUID userId2, LocalDateTime now);
     Optional<ShortUrl> findByShortCodeAndExpiresAtIsNullOrShortCodeAndExpiresAtAfter(String shortCode1, String shortCode2, LocalDateTime now);
+    Optional<ShortUrl> findByIdAndUserIdAndExpiresAtIsNullOrIdAndUserIdAndExpiresAtAfter(Long id, UUID userId, Long id2, UUID userId2, LocalDateTime now);
 }
