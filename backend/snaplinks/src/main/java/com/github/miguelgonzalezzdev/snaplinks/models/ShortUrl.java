@@ -30,7 +30,7 @@ public class ShortUrl {
     @Column(name = "original_url", nullable = false)
     private String originalUrl;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
     @Column(name = "expires_at")
@@ -41,7 +41,7 @@ public class ShortUrl {
 
     // Relationship with users
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = true)
     @JsonIgnore
     private User user;
 

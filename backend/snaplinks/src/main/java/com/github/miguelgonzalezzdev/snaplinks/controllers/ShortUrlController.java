@@ -2,9 +2,6 @@ package com.github.miguelgonzalezzdev.snaplinks.controllers;
 
 import com.github.miguelgonzalezzdev.snaplinks.dtos.ShortUrlRequest;
 import com.github.miguelgonzalezzdev.snaplinks.dtos.ShortUrlResponse;
-import com.github.miguelgonzalezzdev.snaplinks.mappers.ShortUrlMapper;
-import com.github.miguelgonzalezzdev.snaplinks.repositories.ShortUrlRepository;
-import com.github.miguelgonzalezzdev.snaplinks.repositories.UserRepository;
 import com.github.miguelgonzalezzdev.snaplinks.services.ShortUrlService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,9 +15,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ShortUrlController {
 
-    private final ShortUrlRepository shortUrlRepository;
-    private final UserRepository userRepository;
-    private final ShortUrlMapper shortUrlMapper;
     private final ShortUrlService shortUrlService;
 
     @GetMapping()
