@@ -18,20 +18,18 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-900 text-gray-100">
-      {/* HEADER */}
+
       <header className="border-b border-gray-800 bg-gray-900/70 backdrop-blur-lg sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
-          {/* Logo + Nombre */}
           <div className="flex items-center gap-3">
             <img
-              src="/snaplinks-logo.png"       // Ruta a tu logo
+              src="/snaplinks-logo.png"       
               alt="SnapLinks Logo"
-              className="w-8 h-8 sm:w-10 sm:h-10" // Ajusta tamaño según necesites
+              className="w-8 h-8 sm:w-10 sm:h-10" 
             />
             <h2 className="text-xl sm:text-2xl font-semibold text-gray-100">SnapLinks</h2>
           </div>
 
-          {/* Navegación */}
           <nav className="flex items-center gap-6 text-md">
             <a href="#open-source" className="hover:text-indigo-400 transition-colors">
               Iniciar sesión
@@ -46,12 +44,9 @@ export default function LandingPage() {
         </div>
       </header>
 
-
       <main className="flex flex-col">
 
-        {/* HERO */}
         <section className="flex-1 flex flex-col lg:flex-row items-center justify-center px-4 py-20 lg:py-32 max-w-7xl mx-auto gap-10 lg:gap-18 overflow-hidden">
-          {/* Columna izquierda: texto */}
           <div className="flex-[1.3] text-center lg:text-left w-full">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-100 mb-6 sm:mb-8 leading-tight tracking-tight">
               Acorta tus enlaces, <br className="hidden sm:block" /> comparte facilmente
@@ -74,7 +69,6 @@ export default function LandingPage() {
             </a>
           </div>
 
-          {/* Columna derecha: demo */}
           <div className="flex-[0.9] w-full bg-gray-800 border border-gray-700 rounded-2xl p-4 sm:p-8 lg:p-10 shadow-2xl">
             <h3 className="text-2xl sm:text-3xl font-semibold mb-4 sm:mb-5 text-center">
               Acortar URL
@@ -115,12 +109,8 @@ export default function LandingPage() {
           </div>
         </section>
 
-
-
-        {/* SECCIÓN: Por qué usar un acortador */}
         <section className="py-32 px-8 border-t border-gray-800 bg-gray-900">
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
-            {/* Imagen izquierda */}
             <div className="flex-1 w-full">
               <img
                 src="/man-snaplinks.png"
@@ -128,8 +118,7 @@ export default function LandingPage() {
                 className="w-full max-w-md mx-auto"
               />
             </div>
-
-            {/* Texto derecha */}
+            
             <div className="flex-1 text-left">
               <h3 className="text-3xl sm:text-4xl font-bold mb-6 leading-snug text-center lg:text-left">
                 ¿Por qué usar SnapLinks?
@@ -184,8 +173,6 @@ export default function LandingPage() {
           </div>
         </section>
 
-
-        {/* OPEN SOURCE */}
         <section className="py-32 px-8 text-center border-t border-gray-800 bg-gray-900">
           <h3 className="text-3xl font-semibold text-gray-100 mb-6">
             SnapLinks es 100% Open Source
