@@ -1,9 +1,9 @@
 export default function Header() {
     return (
-        <header className="w-full bg-gray-800 backdrop-blur border-b border-gray-700 shadow-sm">
+        <header className="w-full bg-gray-800 backdrop-blur-md border-b border-gray-700 sticky top-0 z-50">
             <div className="max-w-5xl mx-auto flex items-center justify-between p-4">
                 <a href="/" className="flex items-center gap-2">
-                    <h1 className="text-2xl font-bold">SnapLinks</h1>
+                    <h1 className="text-xl font-bold">SnapLinks</h1>
                 </a>
 
                 <nav className="flex gap-6 text-gray-300 text-md">

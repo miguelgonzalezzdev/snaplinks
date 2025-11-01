@@ -1,5 +1,6 @@
 import Footer from "./components/Footer"
 import Header from "./components/Header"
+import LandingPage from "./components/LandingPage";
 import UrlCard from "./components/UrlCard";
 
 function App() {
@@ -33,6 +34,13 @@ function App() {
 
   return (
     <>
+      <LandingPage />
+    </>
+  )
+}
+
+/*
+<>
       <Header />
       <main className="flex-1 flex flex-col items-center p-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-7xl">
@@ -43,8 +51,6 @@ function App() {
       </main>
       <Footer />
     </>
-
-  )
-}
+*/
 
 export default App
