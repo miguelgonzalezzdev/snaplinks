@@ -10,7 +10,7 @@ export default function Header() {
                         alt="SnapLinks Logo"
                         className="w-8 h-8 sm:w-10 sm:h-10"
                     />
-                    <h2 className="text-xl sm:text-2xl font-semibold text-gray-100">SnapLinks</h2>
+                    <h2 className="text-xl sm:text-2xl font-semibold text-gray-100 hidden sm:block">SnapLinks</h2>
                 </Link>
 
                 <nav className="flex items-center gap-6 text-md">
