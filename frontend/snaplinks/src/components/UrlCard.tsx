@@ -14,16 +14,17 @@ interface UrlCardProps {
 }
 
 export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl }: UrlCardProps) {
-    const copyToClipboard = (text: string) => navigator.clipboard.writeText(text);
 
     const shortUrl = config.API_URL + '/u/' + shortCode;
+
+    const copyToClipboard = (text: string) => navigator.clipboard.writeText(text);
 
     const shareUrl = async () => {
         if (navigator.share) {
             try {
                 await navigator.share({
                     title: name,
-                    text: "Mira este enlace acortado:",
+                    text: "Mira mi enlace:",
                     url: shortUrl,
                 });
             } catch (err) {
@@ -48,7 +49,7 @@ export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl }: Url
                 <div className="flex items-center gap-2">
                     <button
                         onClick={() => {}}
-                        className="p-2 rounded-md hover:bg-indigo-500/10 transition-colors text-gray-300 hover:text-indigo-500 flex items-center justify-center"
+                        className="p-2 rounded-md hover:bg-indigo-500/10 transition-colors text-gray-300 hover:text-indigo-400 flex items-center justify-center"
                         title="Editar enlace"
                     >
                         <EditIcon size={22} />

@@ -7,14 +7,17 @@ export const ProtectedRoute = () => {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
   const loadSession = useAuthStore((state) => state.loadSession)
   const refreshTokenFn = useAuthStore((state) => state.refreshTokenFn)
-  const [loading, setLoading] = useState(true)
+  const expiresAt = useAuthStore((state) => state.expiresAt)
   const [authorized, setAuthorized] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const checkAuth = async () => {
 
-      // Si ya está autenticado
-      if (isAuthenticated) {
+      const now = Date.now()
+
+      // Si ya está autenticado y token no expirado
+      if (isAuthenticated && expiresAt && now < expiresAt) {
         setAuthorized(true)
         setLoading(false)
         return
@@ -24,20 +27,27 @@ export const ProtectedRoute = () => {
       const session = loadSession()
       if (session.success) {
 
+        // Si la sesion es valida
+        if (session.isValid) {
+          setAuthorized(true)
+          setLoading(false)
+          return
+        }
+
         // Refrescamos token
         const refreshResult = await refreshTokenFn()
         setAuthorized(refreshResult.success)
         setLoading(false)
         return
       }
-      
+
       // Si todo falla, no autorizado
       setAuthorized(false)
       setLoading(false)
     }
 
     checkAuth()
-  }, [isAuthenticated, loadSession, refreshTokenFn])
+  }, [isAuthenticated, loadSession, refreshTokenFn, expiresAt])
 
   if (loading) return <Loader />
 
