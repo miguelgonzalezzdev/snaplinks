@@ -6,10 +6,7 @@ import com.github.miguelgonzalezzdev.snaplinks.services.ShortUrlService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/demo/urls")
@@ -19,6 +16,7 @@ public class DemoShortUrlController {
     private final ShortUrlService shortUrlService;
 
     @PostMapping
+    @CrossOrigin
     public ResponseEntity<ShortUrlResponse> createDemoShortUrl(@RequestBody DemoShortUrlRequest request) {
         ShortUrlResponse response = shortUrlService.createDemoShortUrl(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);

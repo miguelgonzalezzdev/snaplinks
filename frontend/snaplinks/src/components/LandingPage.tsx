@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Footer from "./Footer";
+import { Link } from "react-router";
 
 export default function LandingPage() {
   const [url, setUrl] = useState("");
@@ -21,25 +22,22 @@ export default function LandingPage() {
 
       <header className="border-b border-gray-800 bg-gray-900/70 backdrop-blur-lg sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-3">
             <img
               src="/snaplinks-logo.png"       
               alt="SnapLinks Logo"
               className="w-8 h-8 sm:w-10 sm:h-10" 
             />
             <h2 className="text-xl sm:text-2xl font-semibold text-gray-100">SnapLinks</h2>
-          </div>
+          </Link>
 
           <nav className="flex items-center gap-6 text-md">
-            <a href="#open-source" className="hover:text-indigo-400 transition-colors">
+            <Link to="/login" className="hover:text-indigo-400 transition-colors">
               Iniciar sesión
-            </a>
-            <a
-              className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition-all"
-              href="#"
-            >
+            </Link>
+            <Link to="/register" className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition-all">
               Registrarse
-            </a>
+            </Link>
           </nav>
         </div>
       </header>
