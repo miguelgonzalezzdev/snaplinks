@@ -20,6 +20,15 @@ export interface LoginRequest {
     password: string
 }
 
-interface RefreshTokenRequest {
+export interface RefreshTokenRequest {
     refreshToken: string
+}
+
+export interface Url {
+    id: number
+    name: string
+    shortCode: string
+    originalUrl: string
+    expiresAt: string
+    qrCode: string
 }

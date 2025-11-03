@@ -17,7 +17,6 @@ public class RedirectController {
     private final RedirectService redirectService;
 
     @GetMapping("/{shortCode}")
-    @CrossOrigin
     public ResponseEntity<Void> redirectToOriginal(@PathVariable String shortCode) {
         RedirectResponse url = redirectService.getOriginalUrlByShortCode(shortCode);
         return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(url.originalUrl())).build();

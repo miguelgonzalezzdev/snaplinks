@@ -18,35 +18,30 @@ public class ShortUrlController {
     private final ShortUrlService shortUrlService;
 
     @GetMapping()
-    @CrossOrigin
     public ResponseEntity<List<ShortUrlResponse>> getAllUrlsByUser() {
         List<ShortUrlResponse> urls = shortUrlService.getAllUrlsByUser();
         return ResponseEntity.ok(urls);
     }
 
     @GetMapping("/{id}")
-    @CrossOrigin
     public ResponseEntity<ShortUrlResponse> getUrlById(@PathVariable Long id){
         ShortUrlResponse url = shortUrlService.getUrlById(id);
         return ResponseEntity.ok(url);
     }
 
     @PostMapping()
-    @CrossOrigin
     public ResponseEntity<ShortUrlResponse> createShortUrl(@RequestBody ShortUrlRequest request) {
         ShortUrlResponse response = shortUrlService.createShortUrl(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PutMapping("/{id}")
-    @CrossOrigin
     public ResponseEntity<ShortUrlResponse> updateShortUrl(@PathVariable Long id, @RequestBody ShortUrlRequest request) {
         ShortUrlResponse response = shortUrlService.updateShortUrl(id, request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @DeleteMapping("/{id}")
-    @CrossOrigin
     public ResponseEntity<Boolean> deleteShortUrl(@PathVariable Long id){
         boolean deleted = shortUrlService.deleteShortUrl(id);
 

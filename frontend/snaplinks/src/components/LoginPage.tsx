@@ -36,7 +36,7 @@ export default function LoginPage() {
                     <div>
                         <label className="block text-gray-300 mb-2 text-sm">Correo electrónico</label>
                         <input
-                            type="email"
+                            type="text"
                             value={email}
                             onChange={handleEmail}
                             placeholder="tucorreo@ejemplo.com"

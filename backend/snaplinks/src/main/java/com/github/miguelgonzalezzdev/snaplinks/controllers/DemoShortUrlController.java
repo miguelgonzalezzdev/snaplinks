@@ -16,7 +16,6 @@ public class DemoShortUrlController {
     private final ShortUrlService shortUrlService;
 
     @PostMapping
-    @CrossOrigin
     public ResponseEntity<ShortUrlResponse> createDemoShortUrl(@RequestBody DemoShortUrlRequest request) {
         ShortUrlResponse response = shortUrlService.createDemoShortUrl(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);

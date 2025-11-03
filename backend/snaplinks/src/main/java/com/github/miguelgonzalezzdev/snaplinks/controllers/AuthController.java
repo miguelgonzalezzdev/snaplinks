@@ -19,21 +19,18 @@ public class AuthController {
     private final UserRepository userRepository;
 
     @PostMapping("/register")
-    @CrossOrigin
     public ResponseEntity<TokenResponse> register(@RequestBody RegisterRequest request) {
         final TokenResponse response = authService.register(request);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/login")
-    @CrossOrigin
     public ResponseEntity<TokenResponse> authenticate(@RequestBody LoginRequest request) {
         final TokenResponse response = authService.login(request);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/refresh-token")
-    @CrossOrigin
     public TokenResponse refreshToken(
             @RequestHeader(HttpHeaders.AUTHORIZATION) final String authentication
     ) {

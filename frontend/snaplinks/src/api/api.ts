@@ -8,11 +8,29 @@ export const api = axios.create({
   baseURL: API_URL,
 })
 
-// Interceptor para manejar expiracion de tokens
+// Interceptor para anadir el token de acceso a cada request
+api.interceptors.request.use(
+  (config) => {
+
+    // Si hay token, se crea el header Authorization
+    const { accessToken } = useAuthStore.getState()
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`
+    }
+    return config
+  },
+
+  (error) => Promise.reject(error)
+)
+
+
+// Interceptor para manejar expiracion de tokens (renovar accesos)
 api.interceptors.response.use(
   response => response,
   async error => {
+
     const originalRequest = error.config
+
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true
       const { refreshTokenFn } = useAuthStore.getState()
@@ -25,6 +43,7 @@ api.interceptors.response.use(
         return api(originalRequest)
       }
     }
+
     return Promise.reject(error)
   }
 )

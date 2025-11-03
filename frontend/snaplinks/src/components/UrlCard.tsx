@@ -1,14 +1,17 @@
+import config from "../config/config";
 
 interface UrlCardProps {
+    id: number;
     name: string;
-    shortUrl: string;
+    shortCode: string;
     originalUrl: string;
     qrCodeUrl: string;
-    expirationDate: string;
 }
 
-export default function UrlCard({ name, shortUrl, originalUrl, qrCodeUrl }: UrlCardProps) {
+export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl }: UrlCardProps) {
     const copyToClipboard = (text: string) => navigator.clipboard.writeText(text);
+
+    const shortUrl = config.API_URL + '/u/' + shortCode;
 
     return (
         <div className="flex flex-col rounded-lg border transition-all border-gray-700 bg-gray-800 text-gray-300 hover:border-gray-600 hover:shadow-lg dark:hover:shadow-lg-light"
