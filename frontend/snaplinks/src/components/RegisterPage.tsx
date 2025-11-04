@@ -75,7 +75,7 @@ export default function RegisterPage() {
                         disabled={isLoading}
                         className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white py-3 rounded-lg font-semibold transition-all shadow-lg shadow-indigo-600/30"
                     >
-                        {isLoading ? "Accediendo..." : "Iniciar sesión"}
+                        {isLoading ? "Accediendo..." : "Crear cuenta"}
                     </button>
                 </form>
                 <div className="text-center mt-6 text-sm text-gray-400">

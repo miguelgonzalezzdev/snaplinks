@@ -6,18 +6,18 @@ import { EditIcon } from "./icons/EditIcon";
 import { ShareIcon } from "./icons/ShareIcon";
 
 interface UrlCardProps {
-    id: number;
-    name: string;
-    shortCode: string;
-    originalUrl: string;
-    qrCodeUrl: string;
+    id: number
+    name: string
+    shortCode: string
+    originalUrl: string
+    qrCodeUrl: string
 }
 
 export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl }: UrlCardProps) {
 
-    const shortUrl = config.API_URL + '/u/' + shortCode;
+    const shortUrl = config.API_URL + '/u/' + shortCode
 
-    const copyToClipboard = (text: string) => navigator.clipboard.writeText(text);
+    const copyToClipboard = (text: string) => navigator.clipboard.writeText(text)
 
     const shareUrl = async () => {
         if (navigator.share) {
@@ -28,19 +28,19 @@ export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl }: Url
                     url: shortUrl,
                 });
             } catch (err) {
-                console.error("Error compartiendo:", err);
+                console.error("Error compartiendo:", err)
             }
         } else {
-            alert("Tu navegador no soporta compartir.");
+            alert("Tu navegador no soporta compartir.")
         }
-    };
+    }
 
     const shareQr = () => {
-        const link = document.createElement('a');
-        link.href = `data:image/png;base64,${qrCodeUrl}`;
-        link.download = `${name}-qr.png`;
-        link.click();
-    };
+        const link = document.createElement('a')
+        link.href = `data:image/png;base64,${qrCodeUrl}`
+        link.download = `${name}-qr.png`
+        link.click()
+    }
 
     return (
         <div className="flex flex-col rounded-lg border transition-all border-gray-700 bg-gray-800 text-gray-300 hover:border-gray-600 hover:shadow-lg dark:hover:shadow-lg-light">
@@ -49,7 +49,7 @@ export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl }: Url
                 <div className="flex items-center gap-2">
                     <button
                         onClick={() => {}}
-                        className="p-2 rounded-md hover:bg-indigo-500/10 transition-colors text-gray-300 hover:text-indigo-400 flex items-center justify-center"
+                        className="p-2 rounded-md hover:bg-indigo-500/10 transition-colors text-gray-300 hover:text-indigo-500 flex items-center justify-center"
                         title="Editar enlace"
                     >
                         <EditIcon size={22} />

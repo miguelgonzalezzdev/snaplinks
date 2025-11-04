@@ -32,3 +32,8 @@ export interface Url {
     expiresAt: string
     qrCode: string
 }
+
+export interface CreateUrlRequest {
+    name: string
+    originalUrl: string
+}
