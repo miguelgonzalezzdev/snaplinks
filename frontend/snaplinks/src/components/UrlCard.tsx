@@ -4,6 +4,7 @@ import { DeleteIcon } from "./icons/DeleteIcon";
 import { DownloadIcon } from "./icons/DownloadIcon";
 import { EditIcon } from "./icons/EditIcon";
 import { ShareIcon } from "./icons/ShareIcon";
+import toast from "react-hot-toast"
 
 interface UrlCardProps {
     id: number
@@ -28,10 +29,10 @@ export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl }: Url
                     url: shortUrl,
                 });
             } catch (err) {
-                console.error("Error compartiendo:", err)
+                toast.error("Error compartiendo: " + err);
             }
         } else {
-            alert("Tu navegador no soporta compartir.")
+            toast.error("Tu navegador no permite compartir.");
         }
     }
 
@@ -40,6 +41,7 @@ export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl }: Url
         link.href = `data:image/png;base64,${qrCodeUrl}`
         link.download = `${name}-qr.png`
         link.click()
+        toast.success("Código QR descargado.");
     }
 
     return (
@@ -85,7 +87,7 @@ export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl }: Url
                     </div>
                 </div>
             </div>
-            <div className="flex justify-start px-5 py-3 border-t border-gray-700 gap-3 flex-wrap">
+            <div className="flex justify-start px-3 py-3 border-t border-gray-700 gap-3 flex-wrap">
                 <button
                     onClick={() => copyToClipboard(shortUrl)}
                     className="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1.5 rounded-lg font-medium text-sm transition-all shadow-sm hover:shadow-md flex items-center gap-2"

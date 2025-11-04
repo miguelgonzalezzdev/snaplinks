@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { CancelIcon } from "./icons/CancelIcon";
+import toast from "react-hot-toast"
 
 interface ModalUrlFormProps {
     isOpen: boolean;
@@ -36,6 +37,7 @@ export default function ModalUrlForm({ isOpen, title, nameProp, originalUrlProp,
         if(!name || !originalUrl || name=="" || originalUrl=="") {
             setError("Por favor, completa todos los campos.")
             setIsLoading(false)
+            
             return
         }
 
@@ -48,6 +50,9 @@ export default function ModalUrlForm({ isOpen, title, nameProp, originalUrlProp,
             setName("")
             setOriginalUrl("")
             onClose()
+            toast.success("URL creada correctamente.");
+        }else{
+            toast.error("Error crear la URL.");
         }
 
         setIsLoading(false)

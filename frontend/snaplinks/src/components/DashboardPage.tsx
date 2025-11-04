@@ -20,11 +20,11 @@ export default function DashboardPage() {
     return (
         <>
             <Header />
-            <main className="flex-1 flex flex-col items-center min-h-dvh p-6 px-2 md:px-14">
+            <main className="flex-1 flex flex-col items-center min-h-dvh p-6 px-4 md:px-14">
                 <div className="w-full mb-8 flex justify-end">
                     <button
                         onClick={openModalForm}
-                        className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-semibold text-sm sm:text-base transition-all shadow-md shadow-indigo-600/30 hover:shadow-indigo-700/40 hover:scale-[1.02]"
+                        className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-semibold text-md sm:text-base transition-all shadow-md shadow-indigo-600/30 hover:shadow-indigo-700/40 hover:scale-[1.02]"
                     >
                         <PlusIcon size={24} />
                         Nueva URL
