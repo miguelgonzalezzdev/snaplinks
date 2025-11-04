@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import type { Url, CreateUrlRequest } from '../types'
+import type { Url, CreateUrlRequest, UpdateUrlRequest } from '../types'
 import { urlService } from "../services/urlService"
 
 export const useUrls = () => {
@@ -28,8 +28,22 @@ export const useUrls = () => {
     const createUrl = async (newUrl: CreateUrlRequest) => {
         try {
             const created = await urlService.createUrl(newUrl)
-            setUrls(prev => [created, ...prev]) 
+            setUrls(prev => [created, ...prev])
             return { success: true, message: "URL creada correctamente" }
+        } catch (err) {
+            const message = err instanceof Error ? err.message : 'Error al crear la URL'
+            setError(message)
+            return { success: false, message }
+        }
+    }
+
+    const editUrl = async (editUrl: UpdateUrlRequest) => {
+        try {
+            const updated = await urlService.updateUrl(editUrl)
+            setUrls(prev =>
+                prev.map(url => (url.id === updated.id ? updated : url))
+            )
+            return { success: true, message: "URL actualizada correctamente" }
         } catch (err) {
             const message = err instanceof Error ? err.message : 'Error al crear la URL'
             setError(message)
@@ -47,6 +61,7 @@ export const useUrls = () => {
         isLoading,
         error,
         fetchUrls,
-        createUrl
+        createUrl,
+        editUrl
     }
 }

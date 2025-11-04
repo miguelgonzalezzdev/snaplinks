@@ -1,21 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CancelIcon } from "./icons/CancelIcon";
 import toast from "react-hot-toast"
 
 interface ModalUrlFormProps {
     isOpen: boolean;
     title: string;
+    idProp?: string;
     nameProp?: string;
     originalUrlProp?: string;
     onClose: () => void;
-    onSubmit: (data: { name: string; originalUrl: string }) => Promise<{ success: boolean; message: string }>;
+    onSubmit: (data: { id?: number; name: string; originalUrl: string }) => Promise<{ success: boolean; message: string }>;
 }
 
-export default function ModalUrlForm({ isOpen, title, nameProp, originalUrlProp, onClose, onSubmit }: ModalUrlFormProps) {
+export default function ModalUrlForm({ isOpen, title, idProp, nameProp, originalUrlProp, onClose, onSubmit }: ModalUrlFormProps) {
     const [name, setName] = useState(nameProp || "")
     const [originalUrl, setOriginalUrl] = useState(originalUrlProp || "")
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState("")
+
+    // Actualizar los estados cuando las props cambian (para manejar diferentes modales)
+    useEffect(() => {
+        if (nameProp !== undefined) setName(nameProp);
+        if (originalUrlProp !== undefined) setOriginalUrl(originalUrlProp);
+    }, [nameProp, originalUrlProp]);
 
     if (!isOpen) return null
 
@@ -34,14 +41,15 @@ export default function ModalUrlForm({ isOpen, title, nameProp, originalUrlProp,
         setError("")
         setIsLoading(true)
 
-        if(!name || !originalUrl || name=="" || originalUrl=="") {
+        if (!name || !originalUrl || name == "" || originalUrl == "") {
             setError("Por favor, completa todos los campos.")
             setIsLoading(false)
-            
+
             return
         }
 
         const result = await onSubmit({
+            id: idProp ? parseInt(idProp) : undefined,
             name: name,
             originalUrl: originalUrl,
         })
@@ -50,8 +58,8 @@ export default function ModalUrlForm({ isOpen, title, nameProp, originalUrlProp,
             setName("")
             setOriginalUrl("")
             onClose()
-            toast.success("URL creada correctamente.");
-        }else{
+            toast.success(result.message);
+        } else {
             toast.error("Error crear la URL.");
         }
 
@@ -106,7 +114,7 @@ export default function ModalUrlForm({ isOpen, title, nameProp, originalUrlProp,
                         type="submit"
                         className="mt-2 inline-block bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-xl font-semibold transition-all shadow-lg shadow-indigo-600/30"
                     >
-                        {isLoading ? "Guardando..." : "Guardar cambios"}
+                        {isLoading ? "Guardando..." : "Guardar"}
                     </button>
                 </form>
             </div>

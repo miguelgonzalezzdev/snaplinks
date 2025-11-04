@@ -12,9 +12,10 @@ interface UrlCardProps {
     shortCode: string
     originalUrl: string
     qrCodeUrl: string
+    onEdit: () => void;
 }
 
-export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl }: UrlCardProps) {
+export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl, onEdit }: UrlCardProps) {
 
     const shortUrl = config.API_URL + '/u/' + shortCode
 
@@ -50,7 +51,7 @@ export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl }: Url
                 <span className="text-base font-medium text-gray-50">{name}</span>
                 <div className="flex items-center gap-2">
                     <button
-                        onClick={() => {}}
+                        onClick={onEdit}
                         className="p-2 rounded-md hover:bg-indigo-500/10 transition-colors text-gray-300 hover:text-indigo-500 flex items-center justify-center"
                         title="Editar enlace"
                     >

@@ -37,3 +37,10 @@ export interface CreateUrlRequest {
     name: string
     originalUrl: string
 }
+
+export interface UpdateUrlRequest {
+    id: number
+    name: string
+    originalUrl: string
+}
+
