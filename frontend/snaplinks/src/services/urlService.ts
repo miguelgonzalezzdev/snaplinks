@@ -18,4 +18,9 @@ export const urlService = {
         const { data } = await api.put(`/urls/${id}`, { name, originalUrl })
         return data
     },
+
+    deleteUrl: async (id: number) => {
+        const { data } = await api.delete(`/urls/${id}`)
+        return data
+    },
 }

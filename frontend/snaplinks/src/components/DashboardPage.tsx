@@ -15,13 +15,12 @@ interface DataToEditUrl {
 }
 
 export default function DashboardPage() {
-    const { urls, isLoading, error, createUrl, editUrl } = useUrls()
+    const { urls, isLoading, error, createUrl, editUrl, deleteUrl } = useUrls()
     const [openModal, setOpenModal] = useState(false);
     const [editingUrl, setEditingUrl] = useState<DataToEditUrl | null>(null);
 
     const openModalForm = (url?: DataToEditUrl) => {
         setEditingUrl(url || null);
-        console.log("Editing URL:", url);
         setOpenModal(true);
     };
 
@@ -86,6 +85,7 @@ export default function DashboardPage() {
                                 {...url}
                                 qrCodeUrl={url.qrCode}
                                 onEdit={() => openModalForm(url)}
+                                onDelete={() => deleteUrl(url.id)}
                             />
                         ))}
                     </div>

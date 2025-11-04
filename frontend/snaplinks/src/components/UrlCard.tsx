@@ -13,10 +13,10 @@ interface UrlCardProps {
     originalUrl: string
     qrCodeUrl: string
     onEdit: () => void;
+    onDelete: () => void;
 }
 
-export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl, onEdit }: UrlCardProps) {
-
+export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl, onEdit, onDelete }: UrlCardProps) {
     const shortUrl = config.API_URL + '/u/' + shortCode
 
     const copyToClipboard = (text: string) => navigator.clipboard.writeText(text)
@@ -58,7 +58,7 @@ export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl, onEdi
                         <EditIcon size={22} />
                     </button>
                     <button
-                        onClick={() => {}}
+                        onClick={onDelete}
                         className="p-2 rounded-md hover:bg-red-500/10 transition-colors text-gray-300 hover:text-red-400 flex items-center justify-center"
                         title="Eliminar enlace"
                     >

@@ -51,6 +51,18 @@ export const useUrls = () => {
         }
     }
 
+    const deleteUrl = async (id: number) => {
+        try {
+            await urlService.deleteUrl(id)
+            setUrls(prev => prev?.filter(url => url.id !== id))
+            return { success: true, message: "URL eliminada correctamente" }
+        } catch (err) {
+            const message = err instanceof Error ? err.message : 'Error al crear la URL'
+            setError(message)
+            return { success: false, message }
+        }
+    }
+
     // Carga los datos al montar
     useEffect(() => {
         fetchUrls()
@@ -62,6 +74,7 @@ export const useUrls = () => {
         error,
         fetchUrls,
         createUrl,
-        editUrl
+        editUrl,
+        deleteUrl
     }
 }
