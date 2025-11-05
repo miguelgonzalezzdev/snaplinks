@@ -19,7 +19,10 @@ interface UrlCardProps {
 export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl, onEdit, onDelete }: UrlCardProps) {
     const shortUrl = config.API_URL + '/u/' + shortCode
 
-    const copyToClipboard = (text: string) => navigator.clipboard.writeText(text)
+    const copyToClipboard = (text: string) => {
+        navigator.clipboard.writeText(text)
+        toast.success("Enlace copiado.");
+    }
 
     const shareUrl = async () => {
         if (navigator.share) {
