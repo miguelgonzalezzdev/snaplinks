@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import type { Url, CreateUrlRequest, UpdateUrlRequest } from '../types'
+import type { Url, CreateUrlRequest, UpdateUrlRequest, CreateDemoUrlRequest } from '../types'
 import { urlService } from "../services/urlService"
 
 export const useUrls = () => {
@@ -63,6 +63,18 @@ export const useUrls = () => {
         }
     }
 
+    const createDemoUrl = async (newDemoUrl: CreateDemoUrlRequest) => {
+        try {
+            const created = await urlService.createDemoUrl(newDemoUrl)
+            setUrls(prev => [created, ...prev])
+            return { success: true, url: created, message: "Demo URL creada correctamente" }
+        } catch (err) {
+            const message = err instanceof Error ? err.message : 'Error al crear la demo URL'
+            setError(message)
+            return { success: false, url: null, message }
+        }
+    }
+
     // Carga los datos al montar
     useEffect(() => {
         fetchUrls()
@@ -75,6 +87,7 @@ export const useUrls = () => {
         fetchUrls,
         createUrl,
         editUrl,
-        deleteUrl
+        deleteUrl,
+        createDemoUrl
     }
 }

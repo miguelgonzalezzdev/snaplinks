@@ -1,5 +1,5 @@
 import { api } from '../api/api.ts'
-import type { CreateUrlRequest, UpdateUrlRequest } from '../types.ts'
+import type { CreateUrlRequest, UpdateUrlRequest, CreateDemoUrlRequest } from '../types.ts'
 
 export const urlService = {
     getUserUrls: async () => {
@@ -21,6 +21,11 @@ export const urlService = {
 
     deleteUrl: async (id: number) => {
         const { data } = await api.delete(`/urls/${id}`)
+        return data
+    },
+
+    createDemoUrl: async (payload: CreateDemoUrlRequest) => {
+        const { data } = await api.post('/demo/urls', payload)
         return data
     },
 }

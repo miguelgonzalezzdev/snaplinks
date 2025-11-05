@@ -1,21 +1,88 @@
+import config from "../config/config";
 import { useState } from "react";
 import Footer from "./Footer";
 import { Link } from "react-router";
+import { GitHubIcon } from "./icons/GitHubIcon";
+import { CutIcon } from "./icons/CutIcon";
+import type { Url } from '../types.ts'
+import toast from "react-hot-toast"
+import { useUrls } from "../hooks/useUrls.tsx";
+import { CopyIcon } from "./icons/CopyIcon.tsx";
+import { DownloadIcon } from "./icons/DownloadIcon.tsx";
+import { ShareIcon } from "./icons/ShareIcon.tsx";
 
 export default function LandingPage() {
-  const [url, setUrl] = useState("");
-  const [shortened, setShortened] = useState<string | null>(null);
+  const { createDemoUrl } = useUrls()
+  const [inputUrl, setInputUrl] = useState("");
+  const [demoUrl, setDemoUrl] = useState<Url | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const handleDemo = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!url.trim()) return;
-    setLoading(true);
-    setTimeout(() => {
-      setShortened(`https://snap.li/${Math.random().toString(36).substring(7)}`);
-      setLoading(false);
-    }, 1200);
-  };
+  const shortUrl = config.API_URL + '/u/'
+
+  const handleUrlDemo = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault()
+    setInputUrl(event.target.value)
+  }
+
+  const handleSubmitDemo = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+
+    if (!inputUrl.trim()) {
+      setLoading(false)
+      toast.error("Introduce una URL válida.");
+      return
+    }
+
+    const result = await createDemoUrl({ originalUrl: inputUrl.trim() })
+
+    if (result.success && result.url) {
+      setDemoUrl(result.url)
+      toast.success("URL creada correctamente.")
+    } else {
+      toast.error(result.message || "Error al crear la URL.")
+    }
+
+    setLoading(false)
+  }
+
+  const copyToClipboard = () => {
+
+    if (!demoUrl) return
+
+    const url = shortUrl + demoUrl.shortCode
+    navigator.clipboard.writeText(url)
+    toast.success("Enlace copiado.");
+  }
+
+  const shareUrl = async () => {
+    if (navigator.share && demoUrl) {
+
+      const url = shortUrl + demoUrl.shortCode
+
+      try {
+        await navigator.share({
+          text: "Mira mi enlace:",
+          url: url,
+        });
+      } catch (err) {
+        toast.error("Error compartiendo: " + err);
+      }
+    } else {
+      toast.error("Tu navegador no permite compartir.");
+    }
+  }
+
+  const shareQr = () => {
+
+    if (!demoUrl) return
+
+    const link = document.createElement('a')
+    link.href = `data:image/png;base64,${demoUrl.qrCode}`
+    link.download = "url-acortada-qr.png"
+    link.click()
+    toast.success("Código QR descargado.");
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-900 text-gray-100" role="document">
@@ -67,43 +134,91 @@ export default function LandingPage() {
             </Link>
           </div>
 
-          <div className="flex-[0.9] w-full bg-gray-800 border border-gray-700 rounded-2xl p-4 sm:p-8 lg:p-10 shadow-2xl" role="region" aria-labelledby="demo-form-title">
+          <div className="flex-[0.9] w-xl bg-gray-800 border border-gray-700 rounded-2xl p-4 sm:p-8 lg:p-10 shadow-2xl" role="region" aria-labelledby="demo-form-title">
             <h3 id="demo-form-title" className="text-2xl sm:text-3xl font-semibold mb-4 sm:mb-5 text-center">
               Acortar URL
             </h3>
             <p id="demo-form-description" className="text-gray-300 text-base text-center mb-6 sm:mb-8">
               Introduce una URL y observa cómo se acorta en segundos.
             </p>
-            <form onSubmit={handleDemo} className="w-full" aria-describedby="demo-form-description">
+            <form onSubmit={handleSubmitDemo} className="w-full" aria-describedby="demo-form-description">
               <div className="flex flex-col sm:flex-row w-full rounded-lg overflow-hidden border border-gray-700 focus-within:border-indigo-500 transition-colors">
                 <input
                   id="demo-url"
                   type="url"
-                  value={url}
-                  onChange={(e) => setUrl(e.target.value)}
+                  value={inputUrl}
+                  onChange={handleUrlDemo}
                   placeholder="https://ejemplo.com"
-                  className="flex-1 px-4 sm:px-5 py-3 sm:py-4 bg-gray-900 text-gray-200 placeholder-gray-500 outline-none text-base sm:text-lg"
+                  className="flex-1 px-4 sm:px-5 py-3 sm:py-4 bg-gray-900 text-gray-200 placeholder-gray-500 outline-none text-base"
                 />
                 <button
                   type="submit"
                   disabled={loading}
-                  className="bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white px-6 sm:px-8 py-3 sm:py-4 font-semibold text-base sm:text-lg transition-all cursor-pointer whitespace-nowrap"
+                  className="inline-flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white px-2 sm:px-4 py-3 sm:py-4 font-semibold text-base transition-all cursor-pointer whitespace-nowrap"
                   aria-busy={loading}
                 >
+                  {!loading && <CutIcon size={22} aria-hidden="true" />}
                   {loading ? "Acortando..." : "Acortar"}
                 </button>
               </div>
             </form>
 
-            {shortened && (
-              <div className="mt-6 sm:mt-8 bg-gray-900 border border-gray-700 rounded-lg p-4 sm:p-5 text-center text-indigo-400 font-medium text-base sm:text-lg break-all" role="status" aria-live="polite">
-                <a
-                  href={shortened}
-                  target="_blank"
-                  className="hover:text-indigo-300 transition-colors"
-                >
-                  {shortened}
-                </a>
+            {demoUrl && (
+              <div
+                className="mt-8 sm:mt-10 bg-gray-900 border border-gray-700 rounded-2xl overflow-hidden"
+                role="status"
+                aria-live="polite"
+              >
+                <div className="p-6 sm:p-8 text-center flex flex-col items-center gap-5">
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-6 w-full">
+                    <div className="shrink-0 w-32 h-32 rounded-xl overflow-hidden">
+                      <img
+                        src={`data:image/png;base64,${demoUrl.qrCode}`}
+                        alt="Código QR del enlace acortado"
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                    <div className="text-center sm:text-left">
+                      <p className="text-gray-400 text-sm mb-1">Enlace acortado:</p>
+                      <a
+                        href={shortUrl + demoUrl.shortCode}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-indigo-400 hover:text-indigo-300 font-medium break-all text-base transition-colors"
+                      >
+                        {shortUrl + demoUrl.shortCode}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex justify-center sm:justify-start px-8 py-4 border-t border-gray-700 gap-3 flex-wrap bg-gray-850">
+                  <button
+                    onClick={copyToClipboard}
+                    className="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1.5 rounded-lg font-medium text-sm transition-all shadow-sm hover:shadow-md flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+                    aria-label={`Copiar enlace acortado: ${shortUrl + demoUrl.shortCode}`}
+                  >
+                    <CopyIcon size={18} aria-hidden="true" />
+                    Copiar
+                  </button>
+
+                  <button
+                    onClick={shareUrl}
+                    className="bg-gray-700 hover:bg-gray-800/50 border border-gray-600 hover:border-indigo-500 text-gray-300 hover:text-indigo-400 px-3 py-1.5 rounded-lg font-medium text-sm transition-all flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+                    aria-label={`Compartir enlace: ${shortUrl + demoUrl.shortCode}`}
+                  >
+                    <ShareIcon size={18} aria-hidden="true" />
+                    Compartir
+                  </button>
+
+                  <button
+                    onClick={shareQr}
+                    className="bg-gray-700 hover:bg-gray-800/50 border border-gray-600 hover:border-indigo-500 text-gray-300 hover:text-indigo-400 px-3 py-1.5 rounded-lg font-medium text-sm transition-all flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+                    aria-label={`Descargar código QR del enlace: ${shortUrl + demoUrl.shortCode}`}
+                  >
+                    <DownloadIcon size={18} aria-hidden="true" />
+                    QR
+                  </button>
+                </div>
               </div>
             )}
           </div>
@@ -185,6 +300,7 @@ export default function LandingPage() {
             target="_blank"
             className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700/50 border border-gray-700 hover:border-indigo-500 text-gray-300 hover:text-indigo-400 px-6 py-4 rounded-lg transition-all text-lg"
           >
+            <GitHubIcon size={22} aria-hidden="true" />
             Ver en GitHub
           </a>
         </section>

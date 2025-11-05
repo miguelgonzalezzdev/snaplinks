@@ -26,10 +26,10 @@ export interface RefreshTokenRequest {
 
 export interface Url {
     id: number
-    name: string
+    name?: string
     shortCode: string
     originalUrl: string
-    expiresAt: string
+    expiresAt?: string
     qrCode: string
 }
 
@@ -44,3 +44,6 @@ export interface UpdateUrlRequest {
     originalUrl: string
 }
 
+export interface CreateDemoUrlRequest {
+    originalUrl: string
+}
