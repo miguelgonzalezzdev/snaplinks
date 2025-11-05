@@ -57,13 +57,12 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-### IntelliJ IDEA ###
+### Editor directories and files ###
 .idea
 *.iws
 *.iml
 *.ipr
 
-### NetBeans ###
 /nbproject/private/
 /nbbuild/
 /dist/
@@ -73,5 +72,11 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-### VS Code ###
 .vscode/
+!.vscode/extensions.json
+
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
