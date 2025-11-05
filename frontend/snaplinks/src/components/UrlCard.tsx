@@ -49,7 +49,7 @@ export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl, onEdi
     }
 
     return (
-        <div className="flex flex-col rounded-lg border transition-all border-gray-700 bg-gray-800 text-gray-300 hover:border-gray-600 hover:shadow-lg dark:hover:shadow-lg-light">
+        <div aria-label={`Tarjeta del enlace acortado: ${name}`} role="group" className="flex flex-col rounded-lg border transition-all border-gray-700 bg-gray-800 text-gray-300 hover:border-gray-600 hover:shadow-lg dark:hover:shadow-lg-light">
             <div className="flex items-center justify-between rounded-t-md border-b px-5 py-3 border-gray-700 bg-gray-700">
                 <span className="text-base font-medium text-gray-50">{name}</span>
                 <div className="flex items-center gap-2">
@@ -57,6 +57,7 @@ export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl, onEdi
                         onClick={onEdit}
                         className="p-2 rounded-md hover:bg-indigo-500/10 transition-colors text-gray-300 hover:text-indigo-500 flex items-center justify-center"
                         title="Editar enlace"
+                        aria-label={`Editar ${name}`}
                     >
                         <EditIcon size={22} />
                     </button>
@@ -64,17 +65,17 @@ export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl, onEdi
                         onClick={onDelete}
                         className="p-2 rounded-md hover:bg-red-500/10 transition-colors text-gray-300 hover:text-red-400 flex items-center justify-center"
                         title="Eliminar enlace"
+                        aria-label={`Eliminar ${name}`}
                     >
                         <DeleteIcon size={22} />
                     </button>
                 </div>
-
             </div>
             <div className="flex flex-col sm:flex-row items-center justify-between p-5 gap-4">
                 <div className="shrink-0 w-28 h-28 rounded-md overflow-hidden">
                     <img
                         src={`data:image/png;base64,${qrCodeUrl}`}
-                        alt="Código QR"
+                        alt={`Código QR del enlace acortado: ${name}`}
                         className="w-full h-full object-cover"
                     />
                 </div>
@@ -82,12 +83,12 @@ export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl, onEdi
                     <div>
                         <p className="text-gray-500 text-xs uppercase tracking-wide mb-1">URL corta</p>
                         <div className="flex items-center gap-2 text-indigo-400">
-                            <a href={shortUrl} target="_blank" className="break-all underline">{shortUrl}</a>
+                            <a href={shortUrl} target="_blank" aria-label={`Abrir enlace corto: ${shortUrl}`} className="break-all underline">{shortUrl}</a>
                         </div>
                     </div>
                     <div>
                         <p className="text-gray-500 text-xs uppercase tracking-wide mb-1">URL original</p>
-                        <a href={originalUrl} target="_blank" className="text-gray-400 break-all underline">{originalUrl}</a>
+                        <a href={originalUrl} target="_blank" aria-label={`Abrir enlace original: ${originalUrl}`} className="text-gray-400 break-all underline">{originalUrl}</a>
                     </div>
                 </div>
             </div>
@@ -95,6 +96,7 @@ export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl, onEdi
                 <button
                     onClick={() => copyToClipboard(shortUrl)}
                     className="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1.5 rounded-lg font-medium text-sm transition-all shadow-sm hover:shadow-md flex items-center gap-2"
+                    aria-label={`Copiar enlace acortado: ${shortUrl}`}
                 >
                     <CopyIcon size={18} />
                     Copiar
@@ -102,6 +104,7 @@ export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl, onEdi
                 <button
                     onClick={shareUrl}
                     className="bg-gray-700 hover:bg-gray-800/50 border border-gray-600 hover:border-indigo-500 text-gray-300 hover:text-indigo-400 px-3 py-1.5 rounded-lg font-medium text-sm transition-all flex items-center gap-2"
+                    aria-label={`Compartir enlace: ${name}`}
                 >
                     <ShareIcon size={18} />
                     Compartir
@@ -109,6 +112,7 @@ export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl, onEdi
                 <button
                     onClick={shareQr}
                     className="bg-gray-700 hover:bg-gray-800/50 border border-gray-600 hover:border-indigo-500 text-gray-300 hover:text-indigo-400 px-3 py-1.5 rounded-lg font-medium text-sm transition-all flex items-center gap-2"
+                    aria-label={`Descargar código QR del enlace: ${name}`}
                 >
                     <DownloadIcon size={18} />
                     QR

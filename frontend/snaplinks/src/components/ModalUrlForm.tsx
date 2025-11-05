@@ -24,6 +24,17 @@ export default function ModalUrlForm({ isOpen, title, idProp, nameProp, original
         if (originalUrlProp !== undefined) setOriginalUrl(originalUrlProp);
     }, [nameProp, originalUrlProp]);
 
+    // Cierra con tecla Escape
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") {
+                onClose();
+            }
+        };
+        document.addEventListener("keydown", handleKeyDown);
+        return () => document.removeEventListener("keydown", handleKeyDown);
+    }, [onClose]);
+
     if (!isOpen) return null
 
     const handleName = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,8 +78,8 @@ export default function ModalUrlForm({ isOpen, title, idProp, nameProp, original
     }
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
-            <div className="bg-gray-800 border border-gray-700 rounded-xl shadow-2xl w-full max-w-lg p-8 animate-fadeIn relative">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm" role="presentation" aria-hidden="false">
+            <div className="bg-gray-800 border border-gray-700 rounded-xl shadow-2xl w-full max-w-lg p-8 animate-fadeIn relative" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description">
                 <button
                     onClick={onClose}
                     className="absolute top-1 right-1 p-2 rounded-md hover:bg-red-500/10 text-gray-300 hover:text-red-400 transition-colors"
@@ -77,26 +88,28 @@ export default function ModalUrlForm({ isOpen, title, idProp, nameProp, original
                     <CancelIcon size={22} />
                 </button>
 
-                <h2 className="text-xl font-semibold text-gray-100 mb-4 text-center">
+                <h2 className="text-xl font-semibold text-gray-100 mb-4 text-center" id="modal-title">
                     {title}
                 </h2>
 
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                     <div>
-                        <label className="block text-sm text-gray-300 mb-1">Nombre</label>
+                        <label htmlFor="nameUrl" className="block text-sm text-gray-300 mb-1">Nombre</label>
                         <input
+                            id="nameUrl"
                             type="text"
                             value={name}
                             onChange={handleName}
                             required
-                            placeholder="Ejemplo: Mi enlace de GitHub"
+                            placeholder="Ejemplo: Mi enlace personal"
                             className="w-full px-4 py-3 rounded-lg bg-gray-900 border border-gray-700 text-gray-100 placeholder-gray-500 focus:outline-none focus:border-indigo-500 transition-all"
                         />
                     </div>
 
                     <div>
-                        <label className="block text-sm text-gray-300 mb-1">URL original</label>
+                        <label htmlFor="originalUrl" className="block text-sm text-gray-300 mb-1">URL original</label>
                         <input
+                            id="originalUrl"
                             type="url"
                             value={originalUrl}
                             onChange={handleOriginalUrl}
@@ -107,7 +120,7 @@ export default function ModalUrlForm({ isOpen, title, idProp, nameProp, original
                     </div>
 
                     {error && (
-                        <p id="loginError" className="text-red-600 text-sm text-center">{error}</p>
+                        <p id="formError" role="alert" className="text-red-600 text-sm text-center">{error}</p>
                     )}
 
                     <button

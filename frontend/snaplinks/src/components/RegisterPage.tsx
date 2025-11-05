@@ -15,15 +15,19 @@ export default function RegisterPage() {
     } = useRegisterForm()
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-gray-300 px-6 py-12">
-            <div className="w-full max-w-md bg-gray-800 border border-gray-700 rounded-2xl shadow-2xl p-8">
+        <div 
+            className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-gray-300 px-6 py-12"
+            role="main"
+            aria-label="Página de registro"
+        >
+            <div className="w-full max-w-md bg-gray-800 border border-gray-700 rounded-2xl shadow-2xl p-8" role="region" aria-labelledby="register-title">
                 <div className="flex flex-col items-center mb-8">
                     <img
                         src="/snaplinks-logo.png"
-                        alt="SnapLinks Logo"
+                        alt="Logo de SnapLinks"
                         className="w-12 h-12 mb-3"
                     />
-                    <h1 className="text-2xl font-bold text-gray-100">Registrarse</h1>
+                    <h1 id="register-title" className="text-2xl font-bold text-gray-100">Registrarse</h1>
                     <p className="text-gray-400 mt-2 text-center text-sm">
                         Bienvenido a{" "}
                         <Link
@@ -36,8 +40,9 @@ export default function RegisterPage() {
                 </div>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                     <div>
-                        <label className="block text-gray-300 mb-2 text-sm">Nombre</label>
+                        <label htmlFor="name" className="block text-gray-300 mb-2 text-sm">Nombre</label>
                         <input
+                            id="name"
                             type="text"
                             value={name}
                             onChange={handleName}
@@ -46,8 +51,9 @@ export default function RegisterPage() {
                         />
                     </div>
                     <div>
-                        <label className="block text-gray-300 mb-2 text-sm">Correo electrónico</label>
+                        <label htmlFor="email" className="block text-gray-300 mb-2 text-sm">Correo electrónico</label>
                         <input
+                            id="email"
                             type="email"
                             value={email}
                             onChange={handleEmail}
@@ -56,8 +62,9 @@ export default function RegisterPage() {
                         />
                     </div>
                     <div>
-                        <label className="block text-gray-300 mb-2 text-sm">Contraseña</label>
+                        <label htmlFor="password" className="block text-gray-300 mb-2 text-sm">Contraseña</label>
                         <input
+                            id="password"
                             type="password"
                             value={password}
                             onChange={handlePassword}
@@ -67,18 +74,19 @@ export default function RegisterPage() {
                     </div>
 
                     {error && (
-                        <p id="loginError" className="text-red-600 text-sm text-center">{error}</p>
+                        <p id="loginError" className="text-red-600 text-sm text-center" role="alert" aria-live="assertive">{error}</p>
                     )}
 
                     <button
                         type="submit"
                         disabled={isLoading}
                         className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white py-3 rounded-lg font-semibold transition-all shadow-lg shadow-indigo-600/30"
+                        aria-busy={isLoading}
                     >
                         {isLoading ? "Accediendo..." : "Crear cuenta"}
                     </button>
                 </form>
-                <div className="text-center mt-6 text-sm text-gray-400">
+                <div className="text-center mt-6 text-sm text-gray-400" aria-label="Enlace a inicio de sesión">
                     <p>
                         ¿Ya tienes una cuenta?{" "}
                         <Link
