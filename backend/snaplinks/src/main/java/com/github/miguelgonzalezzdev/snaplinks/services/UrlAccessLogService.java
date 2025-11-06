@@ -22,22 +22,23 @@ public class UrlAccessLogService {
 
     public void registerUrlAccessLog(ShortUrl shortUrl, HttpServletRequest request) {
 
+        String userAgent = request.getHeader("User-Agent");
         String clientIp = getClientIp(request);
         GeoIpInfo geoInfo = geoIpService.getGeoIpInfo(clientIp);
 
-        System.out.println(geoInfo);
-
-        UrlAccessLog accessLog = UrlAccessLog.builder()
+        UrlAccessLog log = UrlAccessLog.builder()
                 .shortUrl(shortUrl)
                 .accessedAt(LocalDateTime.now())
                 .ipAddress(hashIp(clientIp))
-                .userAgent(request.getHeader("User-Agent"))
+                .userAgent(userAgent)
                 .countryIso(geoInfo.countryIso())
                 .countryName(geoInfo.countryName())
                 .city(geoInfo.city())
+                .browser(detectBrowser(userAgent))
+                .deviceType(detectDeviceType(userAgent))
                 .build();
 
-        urlAccessLogRepository.save(accessLog);
+        urlAccessLogRepository.save(log);
     }
 
     private String getClientIp(HttpServletRequest request) {
@@ -58,5 +59,24 @@ public class UrlAccessLogService {
         } catch (Exception e) {
             throw new RuntimeException("Error hashing IP", e);
         }
+    }
+
+    private String detectBrowser(String ua) {
+        if (ua == null) return "Unknown";
+        ua = ua.toLowerCase();
+        if (ua.contains("chrome") && !ua.contains("edg")) return "Chrome";
+        if (ua.contains("firefox")) return "Firefox";
+        if (ua.contains("safari") && !ua.contains("chrome")) return "Safari";
+        if (ua.contains("edg")) return "Edge";
+        if (ua.contains("opera") || ua.contains("opr")) return "Opera";
+        return "Unknown";
+    }
+
+    private String detectDeviceType(String ua) {
+        if (ua == null) return "Unknown";
+        ua = ua.toLowerCase();
+        if (ua.contains("mobile") || ua.contains("iphone") || ua.contains("android")) return "Mobile";
+        if (ua.contains("ipad") || ua.contains("tablet")) return "Tablet";
+        return "Desktop";
     }
 }

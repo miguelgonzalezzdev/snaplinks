@@ -39,6 +39,12 @@ public class UrlAccessLog {
     @Column(name = "city", length = 150)
     private String city;
 
+    @Column(name = "browser", length = 50)
+    private String browser;
+
+    @Column(name = "device_type", length = 20)
+    private String deviceType;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "short_url_id", referencedColumnName = "id", nullable = false)
     @JsonIgnore
@@ -106,5 +112,21 @@ public class UrlAccessLog {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getBrowser() {
+        return browser;
+    }
+
+    public void setBrowser(String browser) {
+        this.browser = browser;
+    }
+
+    public String getDeviceType() {
+        return deviceType;
+    }
+
+    public void setDeviceType(String deviceType) {
+        this.deviceType = deviceType;
     }
 }
