@@ -7,7 +7,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.time.LocalDateTime;
+import java.util.Base64;
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +23,7 @@ public class UrlAccessLogService {
         UrlAccessLog accessLog = UrlAccessLog.builder()
                 .shortUrl(shortUrl)
                 .accessedAt(LocalDateTime.now())
-                .ipAddress(getClientIp(request))
+                .ipAddress(hashIp(getClientIp(request)))
                 .userAgent(request.getHeader("User-Agent"))
                 .build();
 
@@ -35,5 +38,15 @@ public class UrlAccessLogService {
             ip = ip.split(",")[0].trim();
         }
         return ip;
+    }
+
+    private String hashIp(String ip) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(ip.getBytes(StandardCharsets.UTF_8));
+            return Base64.getEncoder().encodeToString(hash);
+        } catch (Exception e) {
+            throw new RuntimeException("Error hashing IP", e);
+        }
     }
 }
