@@ -30,6 +30,15 @@ public class UrlAccessLog {
     @Column(name = "user_agent", columnDefinition = "TEXT")
     private String userAgent;
 
+    @Column(name = "country_iso", length = 10)
+    private String countryIso;
+
+    @Column(name = "country_name", length = 150)
+    private String countryName;
+
+    @Column(name = "city", length = 150)
+    private String city;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "short_url_id", referencedColumnName = "id", nullable = false)
     @JsonIgnore
@@ -73,5 +82,29 @@ public class UrlAccessLog {
 
     public void setShortUrl(ShortUrl shortUrl) {
         this.shortUrl = shortUrl;
+    }
+
+    public String getCountryIso() {
+        return countryIso;
+    }
+
+    public void setCountryIso(String countryIso) {
+        this.countryIso = countryIso;
+    }
+
+    public String getCountryName() {
+        return countryName;
+    }
+
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

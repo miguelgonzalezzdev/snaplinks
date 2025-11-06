@@ -1,5 +1,6 @@
 package com.github.miguelgonzalezzdev.snaplinks.services;
 
+import com.github.miguelgonzalezzdev.snaplinks.dtos.GeoIpInfo;
 import com.github.miguelgonzalezzdev.snaplinks.models.ShortUrl;
 import com.github.miguelgonzalezzdev.snaplinks.models.UrlAccessLog;
 import com.github.miguelgonzalezzdev.snaplinks.repositories.UrlAccessLogRepository;
@@ -17,14 +18,23 @@ import java.util.Base64;
 public class UrlAccessLogService {
 
     private final UrlAccessLogRepository urlAccessLogRepository;
+    private final GeoIpService geoIpService;
 
     public void registerUrlAccessLog(ShortUrl shortUrl, HttpServletRequest request) {
+
+        String clientIp = getClientIp(request);
+        GeoIpInfo geoInfo = geoIpService.getGeoIpInfo(clientIp);
+
+        System.out.println(geoInfo);
 
         UrlAccessLog accessLog = UrlAccessLog.builder()
                 .shortUrl(shortUrl)
                 .accessedAt(LocalDateTime.now())
-                .ipAddress(hashIp(getClientIp(request)))
+                .ipAddress(hashIp(clientIp))
                 .userAgent(request.getHeader("User-Agent"))
+                .countryIso(geoInfo.countryIso())
+                .countryName(geoInfo.countryName())
+                .city(geoInfo.city())
                 .build();
 
         urlAccessLogRepository.save(accessLog);
