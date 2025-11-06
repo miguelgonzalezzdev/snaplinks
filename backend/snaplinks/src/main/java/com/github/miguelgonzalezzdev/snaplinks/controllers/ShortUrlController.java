@@ -2,7 +2,9 @@ package com.github.miguelgonzalezzdev.snaplinks.controllers;
 
 import com.github.miguelgonzalezzdev.snaplinks.dtos.ShortUrlRequest;
 import com.github.miguelgonzalezzdev.snaplinks.dtos.ShortUrlResponse;
+import com.github.miguelgonzalezzdev.snaplinks.dtos.UrlStatsResponse;
 import com.github.miguelgonzalezzdev.snaplinks.services.ShortUrlService;
+import com.github.miguelgonzalezzdev.snaplinks.services.UrlStatsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import java.util.List;
 public class ShortUrlController {
 
     private final ShortUrlService shortUrlService;
+    private final UrlStatsService urlStatsService;
 
     @GetMapping()
     public ResponseEntity<List<ShortUrlResponse>> getAllUrlsByUser() {
@@ -52,4 +55,8 @@ public class ShortUrlController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/{id}/stats")
+    public UrlStatsResponse getUrlStats(@PathVariable Long id) {
+        return urlStatsService.getStats(id);
+    }
 }

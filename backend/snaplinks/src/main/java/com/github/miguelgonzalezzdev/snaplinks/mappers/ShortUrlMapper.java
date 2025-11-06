@@ -12,8 +12,10 @@ public interface ShortUrlMapper {
 
     ShortUrlMapper INSTANCE = Mappers.getMapper(ShortUrlMapper.class);
 
+    // De entidad a DTO
     ShortUrlResponse toDto(ShortUrl entity);
-
     List<ShortUrlResponse> toDtoList(List<ShortUrl> entities);
 
+    // De DTO a entidad
+    ShortUrl toEntity(ShortUrlResponse dto);
 }

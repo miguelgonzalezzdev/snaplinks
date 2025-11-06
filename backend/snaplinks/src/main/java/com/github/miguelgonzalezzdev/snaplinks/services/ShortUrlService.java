@@ -161,6 +161,13 @@ public class ShortUrlService {
         return true;
     }
 
+    @Transactional(readOnly = true)
+    public ShortUrl findUrlEntityById(Long id) {
+        User user = authService.getAuthenticatedUser();
+        return shortUrlRepository.findByIdAndUserIdAndExpiresAtIsNullOrIdAndUserIdAndExpiresAtAfter(id, user.getId(), id,user.getId(), LocalDateTime.now())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "URL no encontrada"));
+    }
+
     private String generateShortCodeFromUrl(String url) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
