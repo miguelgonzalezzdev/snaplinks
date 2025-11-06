@@ -6,11 +6,13 @@ export default function RegisterPage() {
         name,
         email,
         password,
+        repeatPassword,
         error,
         isLoading,
         handleName,
         handleEmail,
         handlePassword,
+        handleRepeatPassword,
         handleSubmit,
     } = useRegisterForm()
 
@@ -68,6 +70,17 @@ export default function RegisterPage() {
                             type="password"
                             value={password}
                             onChange={handlePassword}
+                            placeholder="••••••••"
+                            className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:border-indigo-500 transition-colors"
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="repeatPassword" className="block text-gray-300 mb-2 text-sm">Confirmar contraseña</label>
+                        <input
+                            id="repeatPassword"
+                            type="password"
+                            value={repeatPassword}
+                            onChange={handleRepeatPassword}
                             placeholder="••••••••"
                             className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-gray-100 placeholder-gray-500 focus:outline-none focus:border-indigo-500 transition-colors"
                         />

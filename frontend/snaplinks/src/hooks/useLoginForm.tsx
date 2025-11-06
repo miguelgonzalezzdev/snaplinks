@@ -25,6 +25,12 @@ export const useLoginForm = () => {
         setIsLoading(true)
         setError("")
 
+        if (!email || !password) {
+            setError("Por favor, completa todos los campos")
+            setIsLoading(false)
+            return
+        }
+
         const res = await login({ email, password })
 
         if (res.success) {

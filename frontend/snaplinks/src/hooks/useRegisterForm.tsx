@@ -7,6 +7,7 @@ export const useRegisterForm = () => {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [repeatPassword, setRepeatPassword] = useState("")
     const [error, setError] = useState("")
     const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate()
@@ -26,10 +27,27 @@ export const useRegisterForm = () => {
         setPassword(event.target.value)
     }
 
+    const handleRepeatPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+        event.preventDefault()
+        setRepeatPassword(event.target.value)
+    }
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         setIsLoading(true)
         setError("")
+
+        if (!name || !email || !password || !repeatPassword) {
+            setError("Por favor, completa todos los campos")
+            setIsLoading(false)
+            return
+        }
+
+        if (password !== repeatPassword) {
+            setError("Las contraseñas no coinciden")
+            setIsLoading(false)
+            return
+        }
 
         const res = await register({ name, email, password })
 
@@ -46,11 +64,13 @@ export const useRegisterForm = () => {
         name,
         email,
         password,
+        repeatPassword,
         error,
         isLoading,
         handleName,
         handleEmail,
         handlePassword,
+        handleRepeatPassword,
         handleSubmit,
     }
 }
