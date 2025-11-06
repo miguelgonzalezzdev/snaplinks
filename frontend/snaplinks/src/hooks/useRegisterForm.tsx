@@ -43,6 +43,12 @@ export const useRegisterForm = () => {
             return
         }
 
+        if (password.length < 8) {
+            setError("La contraseña debe tener al menos 8 caracteres")
+            setIsLoading(false)
+            return
+        }
+
         if (password !== repeatPassword) {
             setError("Las contraseñas no coinciden")
             setIsLoading(false)
