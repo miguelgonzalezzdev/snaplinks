@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -44,6 +45,11 @@ public class ShortUrl {
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = true)
     @JsonIgnore
     private User user;
+
+    // Relationship with url_accesses_logs
+    @OneToMany(mappedBy = "shortUrl", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<UrlAccessLog> urlAccessLog;
 
     // ============ Getters & Setters ============
     public Long getId() {
