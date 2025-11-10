@@ -1,7 +1,6 @@
 import { useUrlStats } from "../hooks/useUrlStats";
 import { CancelIcon } from "./icons/CancelIcon";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, BarChart, XAxis, YAxis, Bar } from "recharts";
-import { Loader } from "./Loader";
 import ErrorBox from "./ErrorBox";
 
 interface ModalUrlStatsProps {
@@ -25,7 +24,7 @@ export default function ModalUrlStats({ isOpen, idUrl, onClose }: ModalUrlStatsP
     const devices = toChartData(stats?.accessesByDeviceType || {});
 
     function timeAgo(dateString: string): string {
-        if (!dateString || dateString=="") return "N/A";
+        if (!dateString || dateString == "") return "N/A";
 
         const date = new Date(dateString);
         const now = new Date();
@@ -48,13 +47,31 @@ export default function ModalUrlStats({ isOpen, idUrl, onClose }: ModalUrlStatsP
         return `Hace ${years} año${years !== 1 ? "s" : ""}`;
     }
 
-    if (isLoading) return <Loader />
+    if (isLoading) {
+        return (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
+                <div className="bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl w-full max-w-5xl p-6 sm:p-8 m-4 relative animate-fadeIn h-full max-h-[95vh] overflow-y-auto flex flex-col items-center justify-center">
+                    <button
+                        onClick={onClose}
+                        className="absolute top-2 right-2 p-2 rounded-md hover:bg-red-500/10 text-gray-400 hover:text-red-400 transition-colors"
+                        aria-label="Cerrar modal"
+                    >
+                        <CancelIcon size={22} />
+                    </button>
+                    <div className="flex flex-col items-center space-y-4">
+                        <div className="w-16 h-16 border-4 border-t-indigo-400 border-gray-700 rounded-full animate-spin"></div>
+                        <p className="text-gray-400 text-lg font-medium">Cargando estadísticas...</p>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     if (error) {
         return (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
                 <div
-                    className="bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl w-full max-w-5xl p-6 sm:p-8 m-4 relative animate-fadeIn max-h-[95vh] overflow-y-auto"
+                    className="bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl w-full max-w-5xl p-6 sm:p-8 m-4 relative animate-fadeIn h-full max-h-[95vh] overflow-y-auto"
                     role="dialog"
                     aria-modal="true"
                 >
@@ -90,15 +107,15 @@ export default function ModalUrlStats({ isOpen, idUrl, onClose }: ModalUrlStatsP
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div className="bg-gray-800 border border-gray-700 rounded-lg p-4 flex flex-col items-center">
                             <p className="text-gray-400 text-sm mb-1">Total de accesos</p>
-                            <p className="text-4xl font-bold text-gray-100">{stats?.totalAccesses || ""}</p>
+                            <p className="text-4xl font-bold text-gray-100">{stats?.totalAccesses || 0}</p>
                         </div>
                         <div className="bg-gray-800 border border-gray-700 rounded-lg p-4 flex flex-col items-center">
                             <p className="text-gray-400 text-sm mb-1">Fecha creación</p>
-                            <p className="text-gray-200 text-lg">{timeAgo(stats?.createdAt || "")}</p>
+                            <p className="text-gray-200 text-lg">{timeAgo(stats?.createdAt || "N/A")}</p>
                         </div>
                         <div className="bg-gray-800 border border-gray-700 rounded-lg p-4 flex flex-col items-center">
                             <p className="text-gray-400 text-sm mb-1">Último acceso</p>
-                            <p className="text-gray-200 text-lg">{timeAgo(stats?.lastAccess || "")}</p>
+                            <p className="text-gray-200 text-lg">{timeAgo(stats?.lastAccess || "N/A")}</p>
                         </div>
                     </div>
 
