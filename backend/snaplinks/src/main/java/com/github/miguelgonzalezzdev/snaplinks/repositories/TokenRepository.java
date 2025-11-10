@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface TokenRepository extends JpaRepository<Token, UUID> {
-    List<Token> findAllValidIsFalseOrRevokedIsFalseByUserId(UUID userId1);
+    //List<Token> findAllValidIsFalseOrRevokedIsFalseByUserId(UUID userId1);
+    List<Token> findAllByExpiredIsFalseOrRevokedIsFalseAndUserId(UUID userId);
     Optional<Token> findByToken(String token);
 }

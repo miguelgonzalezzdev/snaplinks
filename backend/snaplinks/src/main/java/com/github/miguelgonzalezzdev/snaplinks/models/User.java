@@ -20,7 +20,7 @@ import java.util.UUID;
 public class User {
     @Id
     @GeneratedValue
-    @Column(columnDefinition = "UUID DEFAULT uuid_generate_v4()")
+    //@Column(columnDefinition = "UUID DEFAULT uuid_generate_v4()")
     private UUID id;
 
     @Column(nullable = false, length = 150)

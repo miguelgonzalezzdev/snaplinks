@@ -22,22 +22,6 @@ export default function Header() {
                 <nav aria-label="Menú principal">
                     <ul className="flex items-center gap-4 text-md md:text-lg">
                         <li>
-                            <Link
-                                to="/dashboard"
-                                className="hover:text-indigo-400 transition-colors p-2 rounded-md hover:bg-indigo-500/10"
-                            >
-                                Inicio
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to="/"
-                                className="hover:text-indigo-400 transition-colors p-2 rounded-md hover:bg-indigo-500/10"
-                            >
-                                Estadísticas
-                            </Link>
-                        </li>
-                        <li>
                             <button
                                 onClick={handleLogout}
                                 className="hover:text-indigo-400 transition-colors p-2 rounded-md hover:bg-indigo-500/10 cursor-pointer bg-transparent text-inherit"
