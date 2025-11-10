@@ -28,4 +28,9 @@ export const urlService = {
         const { data } = await api.post('/demo/urls', payload)
         return data
     },
+
+    getUrlStats: async (id: number) => {
+        const { data } = await api.get(`/urls/${id}/stats`)
+        return data
+    }
 }

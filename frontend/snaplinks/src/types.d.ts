@@ -33,6 +33,8 @@ export interface Url {
     qrCode: string
 }
 
+export type UrlId = Url["id"]
+
 export interface CreateUrlRequest {
     name: string
     originalUrl: string
@@ -46,4 +48,15 @@ export interface UpdateUrlRequest {
 
 export interface CreateDemoUrlRequest {
     originalUrl: string
+}
+
+export interface UrlStats {
+    id: number;
+    shortCode: string;
+    createdAt: string;
+    totalAccesses: number;
+    lastAccess: string;
+    accessesByCountry: Record<string, number>;
+    accessesByBrowser: Record<string, number>;
+    accessesByDeviceType: Record<string, number>;
 }

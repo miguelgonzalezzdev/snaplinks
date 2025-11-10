@@ -1,4 +1,5 @@
 import config from "../config/config";
+import { ChartIcon } from "./icons/ChartIcon";
 import { CopyIcon } from "./icons/CopyIcon";
 import { DeleteIcon } from "./icons/DeleteIcon";
 import { DownloadIcon } from "./icons/DownloadIcon";
@@ -13,10 +14,11 @@ interface UrlCardProps {
     originalUrl: string
     qrCodeUrl: string
     onEdit: () => void;
+    onView: () => void;
     onDelete: () => void;
 }
 
-export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl, onEdit, onDelete }: UrlCardProps) {
+export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl, onEdit, onView, onDelete }: UrlCardProps) {
     const shortUrl = config.API_URL + '/u/' + shortCode
 
     const copyToClipboard = (text: string) => {
@@ -94,8 +96,16 @@ export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl, onEdi
             </div>
             <div className="flex justify-start px-3 py-3 border-t border-gray-700 gap-3 flex-wrap">
                 <button
-                    onClick={() => copyToClipboard(shortUrl)}
+                    onClick={onView}
                     className="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1.5 rounded-lg font-medium text-sm transition-all shadow-sm hover:shadow-md flex items-center gap-2"
+                    aria-label={`Ver estadísticas de: ${shortUrl}`}
+                >
+                    <ChartIcon size={18} />
+                    Estadísticas
+                </button>
+                <button
+                    onClick={() => copyToClipboard(shortUrl)}
+                    className="bg-gray-700 hover:bg-gray-800/50 border border-gray-600 hover:border-indigo-500 text-gray-300 hover:text-indigo-400 px-3 py-1.5 rounded-lg font-medium text-sm transition-all flex items-center gap-2"
                     aria-label={`Copiar enlace acortado: ${shortUrl}`}
                 >
                     <CopyIcon size={18} />
