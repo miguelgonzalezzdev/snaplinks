@@ -1,15 +1,10 @@
 package com.github.miguelgonzalezzdev.snaplinks.services;
 
-import com.github.miguelgonzalezzdev.snaplinks.dtos.ShortUrlResponse;
 import com.github.miguelgonzalezzdev.snaplinks.dtos.UrlStatsResponse;
-import com.github.miguelgonzalezzdev.snaplinks.mappers.ShortUrlMapper;
 import com.github.miguelgonzalezzdev.snaplinks.models.ShortUrl;
-import com.github.miguelgonzalezzdev.snaplinks.repositories.ShortUrlRepository;
 import com.github.miguelgonzalezzdev.snaplinks.repositories.UrlAccessLogRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -31,7 +26,6 @@ public class UrlStatsService {
         LocalDateTime createdAt = url.getCreatedAt();
 
         long total = urlAccessLogRepository.countByShortUrlId(urlId);
-        var firstAccess = urlAccessLogRepository.findFirstAccess(urlId);
         var lastAccess = urlAccessLogRepository.findLastAccess(urlId);
 
         Map<String, Long> byCountry = urlAccessLogRepository.countByCountry(urlId)

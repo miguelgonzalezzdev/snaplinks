@@ -77,7 +77,7 @@ public class TokenRepositoryTest {
     void testFindAllValidIsFalseOrRevokedIsFalseByUserId() {
         List<Token> tokens = tokenRepository.findAllByExpiredIsFalseOrRevokedIsFalseAndUserId(user.getId());
         assertNotNull(tokens);
-        assertEquals(2, tokens.size()); // token1 y token2 cumplen al menos una condición
+        assertEquals(2, tokens.size()); // token1 y token2 cumplen al menos una condicion
 
         boolean containsToken1 = tokens.stream().anyMatch(t -> t.getToken().equals("token-1"));
         boolean containsToken2 = tokens.stream().anyMatch(t -> t.getToken().equals("token-2"));

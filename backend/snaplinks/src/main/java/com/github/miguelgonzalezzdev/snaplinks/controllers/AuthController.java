@@ -3,7 +3,6 @@ package com.github.miguelgonzalezzdev.snaplinks.controllers;
 import com.github.miguelgonzalezzdev.snaplinks.dtos.LoginRequest;
 import com.github.miguelgonzalezzdev.snaplinks.dtos.RegisterRequest;
 import com.github.miguelgonzalezzdev.snaplinks.dtos.TokenResponse;
-import com.github.miguelgonzalezzdev.snaplinks.repositories.UserRepository;
 import com.github.miguelgonzalezzdev.snaplinks.services.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -11,12 +10,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/auth") // /snaplinks-api/v1
+@RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
 
     private final AuthService authService;
-    private final UserRepository userRepository;
 
     @PostMapping("/register")
     public ResponseEntity<TokenResponse> register(@RequestBody RegisterRequest request) {
