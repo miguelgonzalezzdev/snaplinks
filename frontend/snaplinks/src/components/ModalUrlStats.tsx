@@ -2,6 +2,7 @@ import { useUrlStats } from "../hooks/useUrlStats";
 import { CancelIcon } from "./icons/CancelIcon";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, BarChart, XAxis, YAxis, Bar } from "recharts";
 import ErrorBox from "./ErrorBox";
+import { useEffect } from "react";
 
 interface ModalUrlStatsProps {
     isOpen: boolean;
@@ -11,6 +12,17 @@ interface ModalUrlStatsProps {
 
 export default function ModalUrlStats({ isOpen, idUrl, onClose }: ModalUrlStatsProps) {
     const { stats, isLoading, error } = useUrlStats({ id: idUrl });
+
+    // Cierra con tecla Escape
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") {
+                onClose();
+            }
+        };
+        document.addEventListener("keydown", handleKeyDown);
+        return () => document.removeEventListener("keydown", handleKeyDown);
+    }, [isOpen, onClose]);
 
     if (!isOpen) return null;
 
@@ -49,7 +61,7 @@ export default function ModalUrlStats({ isOpen, idUrl, onClose }: ModalUrlStatsP
 
     if (isLoading) {
         return (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="modal-loading-title">
                 <div className="bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl w-full max-w-5xl p-6 sm:p-8 m-4 relative animate-fadeIn h-full max-h-[95vh] overflow-y-auto flex flex-col items-center justify-center">
                     <button
                         onClick={onClose}
@@ -60,7 +72,7 @@ export default function ModalUrlStats({ isOpen, idUrl, onClose }: ModalUrlStatsP
                     </button>
                     <div className="flex flex-col items-center space-y-4">
                         <div className="w-16 h-16 border-4 border-t-indigo-400 border-gray-700 rounded-full animate-spin"></div>
-                        <p className="text-gray-400 text-lg font-medium">Cargando estadísticas...</p>
+                        <p id="modal-loading-title" className="text-gray-400 text-lg font-medium">Cargando estadísticas...</p>
                     </div>
                 </div>
             </div>
@@ -86,7 +98,12 @@ export default function ModalUrlStats({ isOpen, idUrl, onClose }: ModalUrlStatsP
     }
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
+        <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-stats-title"
+        >
             <div
                 className="bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl w-full max-w-5xl p-6 sm:p-8 m-4 relative animate-fadeIn max-h-[95vh] overflow-y-auto"
                 role="dialog"
@@ -99,12 +116,12 @@ export default function ModalUrlStats({ isOpen, idUrl, onClose }: ModalUrlStatsP
                 >
                     <CancelIcon size={22} />
                 </button>
-                <h2 className="text-2xl font-semibold text-gray-100 mb-6 text-center">
+                <h2 id="modal-stats-title" className="text-2xl font-semibold text-gray-100 mb-6 text-center">
                     Estadísticas de la URL
                 </h2>
                 <div className="space-y-8">
 
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4" role="group" aria-label="Resumen de estadísticas">
                         <div className="bg-gray-800 border border-gray-700 rounded-lg p-4 flex flex-col items-center">
                             <p className="text-gray-400 text-sm mb-1">Total de accesos</p>
                             <p className="text-4xl font-bold text-gray-100">{stats?.totalAccesses || 0}</p>
@@ -121,7 +138,7 @@ export default function ModalUrlStats({ isOpen, idUrl, onClose }: ModalUrlStatsP
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                        <div className="bg-gray-800 border border-gray-700 rounded-lg p-5 flex flex-col">
+                        <div className="bg-gray-800 border border-gray-700 rounded-lg p-5 flex flex-col" role="region" aria-label="Accesos por país">
                             <h4 className="text-md font-semibold text-gray-200 mb-4 text-center">Accesos por país</h4>
                             <ResponsiveContainer width="100%" height={240}>
                                 <BarChart data={countries}>
@@ -144,7 +161,7 @@ export default function ModalUrlStats({ isOpen, idUrl, onClose }: ModalUrlStatsP
                             </ResponsiveContainer>
                         </div>
 
-                        <div className="bg-gray-800 border border-gray-700 rounded-lg p-5 flex flex-col">
+                        <div className="bg-gray-800 border border-gray-700 rounded-lg p-5 flex flex-col" role="region" aria-label="Accesos por navegador">
                             <h4 className="text-md font-semibold text-gray-200 mb-4 text-center">Accesos por navegador</h4>
                             <ResponsiveContainer width="100%" height={240}>
                                 <BarChart data={browsers}>
@@ -167,7 +184,7 @@ export default function ModalUrlStats({ isOpen, idUrl, onClose }: ModalUrlStatsP
                             </ResponsiveContainer>
                         </div>
 
-                        <div className="bg-gray-800 border border-gray-700 rounded-lg p-5 md:col-span-2 flex flex-col">
+                        <div className="bg-gray-800 border border-gray-700 rounded-lg p-5 md:col-span-2 flex flex-col" role="region" aria-label="Accesos por tipos de dispositivo">
                             <h4 className="text-md font-semibold text-gray-200 mb-4 text-center">Accesos por dispositivo</h4>
                             <div className="flex-1">
                                 <ResponsiveContainer width="100%" height={260}>
