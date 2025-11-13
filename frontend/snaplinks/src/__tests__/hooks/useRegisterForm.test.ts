@@ -30,9 +30,9 @@ describe("useRegisterForm hook", () => {
     callback: (e: React.ChangeEvent<HTMLInputElement>) => void,
     value: string
   ) => {
-    const event = { 
-        target: { value }, 
-        preventDefault: () => {},
+    const event = {
+      target: { value },
+      preventDefault: () => { },
     } as React.ChangeEvent<HTMLInputElement>;
     callback(event);
   };
@@ -57,7 +57,7 @@ describe("useRegisterForm hook", () => {
     const { result } = renderHook(() => useRegisterForm());
 
     await act(async () => {
-      const event = { preventDefault: () => {} } as React.FormEvent<HTMLFormElement>;
+      const event = { preventDefault: () => { } } as React.FormEvent<HTMLFormElement>;
       await result.current.handleSubmit(event);
     });
 
@@ -76,7 +76,7 @@ describe("useRegisterForm hook", () => {
     });
 
     await act(async () => {
-      const event = { preventDefault: () => {} } as React.FormEvent<HTMLFormElement>;
+      const event = { preventDefault: () => { } } as React.FormEvent<HTMLFormElement>;
       await result.current.handleSubmit(event);
     });
 
@@ -95,7 +95,7 @@ describe("useRegisterForm hook", () => {
     });
 
     await act(async () => {
-      const event = { preventDefault: () => {} } as React.FormEvent<HTMLFormElement>;
+      const event = { preventDefault: () => { } } as React.FormEvent<HTMLFormElement>;
       await result.current.handleSubmit(event);
     });
 
@@ -116,7 +116,7 @@ describe("useRegisterForm hook", () => {
     });
 
     await act(async () => {
-      const event = { preventDefault: () => {} } as React.FormEvent<HTMLFormElement>;
+      const event = { preventDefault: () => { } } as React.FormEvent<HTMLFormElement>;
       await result.current.handleSubmit(event);
     });
 
@@ -143,7 +143,7 @@ describe("useRegisterForm hook", () => {
     });
 
     await act(async () => {
-      const event = { preventDefault: () => {} } as React.FormEvent<HTMLFormElement>;
+      const event = { preventDefault: () => { } } as React.FormEvent<HTMLFormElement>;
       await result.current.handleSubmit(event);
     });
 
