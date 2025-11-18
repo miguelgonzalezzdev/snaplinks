@@ -1,4 +1,10 @@
 package com.github.miguelgonzalezzdev.snaplinks.dtos;
 
-public record DemoShortUrlRequest(String originalUrl) {
+import jakarta.validation.constraints.NotBlank;
+
+public record DemoShortUrlRequest(
+
+        @NotBlank(message = "La URL es obligatoria")
+        String originalUrl
+) {
 }

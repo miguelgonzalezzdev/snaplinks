@@ -20,6 +20,7 @@
 - **Routing:** React Router DOM
 - **HTTP Client:** Axios
 - **Estados globales:** Zustand
+- **Tests:** Vitest
 
 ### Backend
 
