@@ -1,4 +1,17 @@
 package com.github.miguelgonzalezzdev.snaplinks.dtos;
 
-public record RegisterRequest(String email, String password, String name) {
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+public record RegisterRequest(
+
+        @NotBlank(message = "El email es obligatorio")
+        String email,
+
+        @NotBlank(message = "La contraseña es obligatoria")
+        @Size(min = 8, message = "La contraseña debe tener al menos 8 caracteres")
+        String password,
+
+        @NotBlank(message = "El nombre es obligatorio")
+        String name) {
 }
