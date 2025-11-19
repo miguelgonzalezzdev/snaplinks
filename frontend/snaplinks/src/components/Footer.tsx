@@ -12,7 +12,7 @@ export default function Footer() {
           <p>
             Desarrollado con <span role="img" aria-label="corazón blanco">🤍</span> por{" "}
             <a
-              href="https://miguelgonzalezzdev.github.io/portfolio/"
+              href="https://miguelgonzalezdev.es"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-indigo-400 transition-colors"

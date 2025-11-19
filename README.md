@@ -52,8 +52,13 @@
             ├─ dtos/          → Objetos para requests/responses (API)
             ├─ models/        → Entidades JPA que representan tablas
             ├─ repositories/  → Acceso a datos con JPA
+            ├─ schedules/     → Tareas cron a ejecutar
             └─ services/      → Lógica de negocio 
 
 ## 📌 Mejoras futuras
 
 - **Cacheo con Redis:** Almacenar temporalmente las URLs más usadas para mejorar el rendimiento y reducir la carga en la base de datos.
+
+---
+
+Diseñado con ❤️ por [**Miguel**](https://miguelgonzalezdev.es)

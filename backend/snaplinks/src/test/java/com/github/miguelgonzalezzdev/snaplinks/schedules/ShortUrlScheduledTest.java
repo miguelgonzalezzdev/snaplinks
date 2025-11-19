@@ -11,7 +11,6 @@ import org.springframework.test.context.ActiveProfiles;
 
 import static org.mockito.Mockito.*;
 
-@DataJpaTest
 @ActiveProfiles("test")
 class ShortUrlScheduledTest {
 
@@ -30,7 +29,7 @@ class ShortUrlScheduledTest {
     // ExpiredUrlsCleaner
     // ------------------------------------------------------------
     @Test
-    void limpiarUrlsExpiradas_shouldCallRepository() {
+    void expiredUrlsCleaner_shouldCallRepository() {
 
         // Given
         when(shortUrlRepository.deleteExpiredUrls()).thenReturn(5);
