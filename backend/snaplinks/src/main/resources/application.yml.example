@@ -28,6 +28,10 @@ application:
       refresh-token:
         expiration: 604800000 # 7 days
 
+geoip:
+  db:
+    path: /opt/geoip/GeoLite2-City.mmdb
+
 ---
 
 spring:
