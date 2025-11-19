@@ -12,7 +12,7 @@ public class ShortUrlScheduled {
 
     private final ShortUrlRepository shortUrlRepository;
 
-    @Scheduled(cron = "0 0 3 * * ?") // Todos los dias a las 03:00
+    @Scheduled(cron = "0 0 3 * * ?", zone = "Europe/Madrid") // Todos los dias a las 03:00
     @Transactional
     public void expiredUrlsCleaner() {
         int deleted = shortUrlRepository.deleteExpiredUrls();

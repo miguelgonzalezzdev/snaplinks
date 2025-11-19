@@ -26,6 +26,7 @@ public class TokenRepositoryTest {
     private User user;
     private Token token1;
     private Token token2;
+    private Token validToken1;
 
     @BeforeEach
     void setUp() {
@@ -56,8 +57,16 @@ public class TokenRepositoryTest {
                 .expired(false)
                 .build();
 
+        validToken1 = Token.builder()
+                .token("valid-token-1")
+                .user(user)
+                .revoked(false)
+                .expired(false)
+                .build();
+
         tokenRepository.save(token1);
         tokenRepository.save(token2);
+        tokenRepository.save(validToken1);
     }
 
     @Test
@@ -77,12 +86,26 @@ public class TokenRepositoryTest {
     void testFindAllValidIsFalseOrRevokedIsFalseByUserId() {
         List<Token> tokens = tokenRepository.findAllByExpiredIsFalseOrRevokedIsFalseAndUserId(user.getId());
         assertNotNull(tokens);
-        assertEquals(2, tokens.size()); // token1 y token2 cumplen al menos una condicion
+        assertEquals(3, tokens.size());
 
         boolean containsToken1 = tokens.stream().anyMatch(t -> t.getToken().equals("token-1"));
         boolean containsToken2 = tokens.stream().anyMatch(t -> t.getToken().equals("token-2"));
+        boolean containsValidToken1 = tokens.stream().anyMatch(t -> t.getToken().equals("valid-token-1"));
 
         assertTrue(containsToken1);
         assertTrue(containsToken2);
+        assertTrue(containsValidToken1);
+    }
+
+    @Test
+    void testDeleteExpiredOrRevokedTokens() {
+        int deletedCount = tokenRepository.deleteExpiredOrRevokedTokens();
+
+        assertEquals(2, deletedCount, "Debe eliminar token1 (expirado) y token2 (revocado)");
+
+        List<Token> remainingTokens = tokenRepository.findAll();
+
+        assertEquals(1, remainingTokens.size(), "Solo debe quedar el token válido");
+        assertEquals("valid-token-1", remainingTokens.get(0).getToken());
     }
 }
