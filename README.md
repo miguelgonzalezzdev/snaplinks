@@ -24,13 +24,14 @@
 
 ### Backend
 
-- **Lenguaje:** Java
-- **Framework:** Spring Boot
+- **Lenguaje:** Java 21
+- **Framework:** Spring Boot 3
 - **Base de datos:** PostgreSQL
 - **ORM:** Spring Data JPA / Hibernate
 - **Seguridad:** Spring Security + JWT
 - **Build:** Maven
 - **Tests:** JUnit + Mockito
+- **Documentación:** Swagger UI + OpenAPI
 
 ## 📂 Estructura del proyecto
 
@@ -52,8 +53,13 @@
             ├─ dtos/          → Objetos para requests/responses (API)
             ├─ models/        → Entidades JPA que representan tablas
             ├─ repositories/  → Acceso a datos con JPA
+            ├─ schedules/     → Tareas cron a ejecutar
             └─ services/      → Lógica de negocio 
 
 ## 📌 Mejoras futuras
 
 - **Cacheo con Redis:** Almacenar temporalmente las URLs más usadas para mejorar el rendimiento y reducir la carga en la base de datos.
+
+---
+
+Diseñado con ❤️ por [**Miguel**](https://miguelgonzalezdev.es)

@@ -82,7 +82,7 @@ class AuthControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(registerRequest)))
                 .andDo(print())
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.access_token").value(tokenResponse.accessToken()))
                 .andExpect(jsonPath("$.refresh_token").value(tokenResponse.refreshToken()));
     }
