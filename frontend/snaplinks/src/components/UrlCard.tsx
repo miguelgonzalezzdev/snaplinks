@@ -83,13 +83,13 @@ export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl, onEdi
                 </div>
                 <div className="flex flex-col gap-3 flex-1 text-sm">
                     <div>
-                        <p className="text-gray-500 text-xs uppercase tracking-wide mb-1">URL corta</p>
+                        <p className="text-gray-400 text-xs uppercase tracking-wide mb-1">URL corta:</p>
                         <div className="flex items-center gap-2 text-indigo-400">
                             <a href={shortUrl} target="_blank" aria-label={`Abrir enlace corto: ${shortUrl}`} className="break-all underline">{shortUrl}</a>
                         </div>
                     </div>
                     <div>
-                        <p className="text-gray-500 text-xs uppercase tracking-wide mb-1">URL original</p>
+                        <p className="text-gray-400 text-xs uppercase tracking-wide mb-1">URL original:</p>
                         <a href={originalUrl} target="_blank" aria-label={`Abrir enlace original: ${originalUrl}`} className="text-gray-400 break-all underline">{originalUrl}</a>
                     </div>
                 </div>

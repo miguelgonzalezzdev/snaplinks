@@ -91,7 +91,7 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3" aria-label="Ir al inicio">
             <img
-              src="/snaplinks-logo.png"
+              src="/snaplinks-logo.webp"
               alt="Logo de SnapLinks"
               className="w-8 h-8 sm:w-10 sm:h-10"
             />
@@ -228,7 +228,7 @@ export default function LandingPage() {
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
             <div className="flex-1 w-full">
               <img
-                src="/man-snaplinks.png"
+                src="/man-snaplinks.webp"
                 alt="Ilustración que representa el uso del acortador de enlaces"
                 className="w-full max-w-md mx-auto"
               />

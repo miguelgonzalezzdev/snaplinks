@@ -94,7 +94,7 @@ export default function ModalUrlForm({ isOpen, title, idProp, nameProp, original
 
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5">
                     <div>
-                        <label htmlFor="nameUrl" className="block text-sm text-gray-300 mb-1">Nombre</label>
+                        <label htmlFor="nameUrl" className="block text-sm text-gray-300 mb-1">Nombre:</label>
                         <input
                             id="nameUrl"
                             type="text"
@@ -107,7 +107,7 @@ export default function ModalUrlForm({ isOpen, title, idProp, nameProp, original
                     </div>
 
                     <div>
-                        <label htmlFor="originalUrl" className="block text-sm text-gray-300 mb-1">URL original</label>
+                        <label htmlFor="originalUrl" className="block text-sm text-gray-300 mb-1">URL original:</label>
                         <input
                             id="originalUrl"
                             type="url"

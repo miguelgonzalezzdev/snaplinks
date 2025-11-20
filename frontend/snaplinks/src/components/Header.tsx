@@ -13,7 +13,7 @@ export default function Header() {
             <div className="mx-auto px-4 md:px-14 py-4 flex items-center justify-between">
                 <Link to="/dashboard" className="flex items-center gap-3">
                     <img
-                        src="/snaplinks-logo.png"
+                        src="/snaplinks-logo.webp"
                         alt="Logo de SnapLinks - acortador de enlaces"
                         className="w-8 h-8 sm:w-10 sm:h-10"
                     />
