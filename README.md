@@ -24,13 +24,14 @@
 
 ### Backend
 
-- **Lenguaje:** Java
-- **Framework:** Spring Boot
+- **Lenguaje:** Java 21
+- **Framework:** Spring Boot 3
 - **Base de datos:** PostgreSQL
 - **ORM:** Spring Data JPA / Hibernate
 - **Seguridad:** Spring Security + JWT
 - **Build:** Maven
 - **Tests:** JUnit + Mockito
+- **Documentación:** Swagger UI + OpenAPI
 
 ## 📂 Estructura del proyecto
 
