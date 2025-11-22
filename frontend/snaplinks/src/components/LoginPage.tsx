@@ -21,7 +21,7 @@ export default function LoginPage() {
             <div role="region" aria-labelledby="login-title" className="w-full max-w-md bg-gray-800 border border-gray-700 rounded-2xl shadow-2xl p-8">
                 <div className="flex flex-col items-center mb-8">
                     <img
-                        src="/snaplinks-logo.png"
+                        src="/snaplinks-logo.webp"
                         alt="Logo de SnapLinks"
                         className="w-12 h-12 mb-3"
                     />
@@ -67,7 +67,7 @@ export default function LoginPage() {
                     <button
                         type="submit"
                         disabled={isLoading}
-                        className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white py-3 rounded-lg font-semibold transition-all shadow-lg shadow-indigo-600/30"
+                        className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white py-3 rounded-lg font-semibold transition-all shadow-lg shadow-indigo-600/30 cursor-pointer"
                         aria-busy={isLoading}
                     >
                         {isLoading ? "Accediendo..." : "Iniciar sesión"}

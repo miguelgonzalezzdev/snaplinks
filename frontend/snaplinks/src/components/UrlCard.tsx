@@ -57,7 +57,7 @@ export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl, onEdi
                 <div className="flex items-center gap-2">
                     <button
                         onClick={onEdit}
-                        className="p-2 rounded-md hover:bg-indigo-500/10 transition-colors text-gray-300 hover:text-indigo-500 flex items-center justify-center"
+                        className="p-2 rounded-md hover:bg-indigo-500/10 transition-colors text-gray-300 hover:text-indigo-500 flex items-center justify-center cursor-pointer"
                         title="Editar enlace"
                         aria-label={`Editar ${name}`}
                     >
@@ -65,7 +65,7 @@ export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl, onEdi
                     </button>
                     <button
                         onClick={onDelete}
-                        className="p-2 rounded-md hover:bg-red-500/10 transition-colors text-gray-300 hover:text-red-400 flex items-center justify-center"
+                        className="p-2 rounded-md hover:bg-red-500/10 transition-colors text-gray-300 hover:text-red-400 flex items-center justify-center cursor-pointer"
                         title="Eliminar enlace"
                         aria-label={`Eliminar ${name}`}
                     >
@@ -97,35 +97,35 @@ export default function UrlCard({ name, shortCode, originalUrl, qrCodeUrl, onEdi
             <div className="flex justify-start px-3 py-3 border-t border-gray-700 gap-3 flex-wrap">
                 <button
                     onClick={onView}
-                    className="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1.5 rounded-lg font-medium text-sm transition-all shadow-sm hover:shadow-md flex items-center gap-2"
+                    className="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1.5 rounded-lg font-medium text-sm transition-all shadow-sm hover:shadow-md flex items-center gap-2 cursor-pointer"
                     aria-label={`Ver estadísticas de: ${shortUrl}`}
                 >
-                    <ChartIcon size={18} />
-                    Estadísticas
+                    <ChartIcon size={20} />
+                    <span className="hidden sm:block">Estadísticas</span>
                 </button>
                 <button
                     onClick={() => copyToClipboard(shortUrl)}
-                    className="bg-gray-700 hover:bg-gray-800/50 border border-gray-600 hover:border-indigo-500 text-gray-300 hover:text-indigo-400 px-3 py-1.5 rounded-lg font-medium text-sm transition-all flex items-center gap-2"
+                    className="bg-gray-700 hover:bg-gray-800/50 border border-gray-600 hover:border-indigo-500 text-gray-300 hover:text-indigo-400 px-3 py-1.5 rounded-lg font-medium text-sm transition-all flex items-center gap-2 cursor-pointer"
                     aria-label={`Copiar enlace acortado: ${shortUrl}`}
                 >
-                    <CopyIcon size={18} />
-                    Copiar
+                    <CopyIcon size={20} />
+                    <span className="hidden sm:block">Copiar</span>
                 </button>
                 <button
                     onClick={shareUrl}
-                    className="bg-gray-700 hover:bg-gray-800/50 border border-gray-600 hover:border-indigo-500 text-gray-300 hover:text-indigo-400 px-3 py-1.5 rounded-lg font-medium text-sm transition-all flex items-center gap-2"
+                    className="bg-gray-700 hover:bg-gray-800/50 border border-gray-600 hover:border-indigo-500 text-gray-300 hover:text-indigo-400 px-3 py-1.5 rounded-lg font-medium text-sm transition-all flex items-center gap-2 cursor-pointer"
                     aria-label={`Compartir enlace: ${name}`}
                 >
-                    <ShareIcon size={18} />
-                    Compartir
+                    <ShareIcon size={20} />
+                    <span className="hidden sm:block">Compartir</span>
                 </button>
                 <button
                     onClick={shareQr}
-                    className="bg-gray-700 hover:bg-gray-800/50 border border-gray-600 hover:border-indigo-500 text-gray-300 hover:text-indigo-400 px-3 py-1.5 rounded-lg font-medium text-sm transition-all flex items-center gap-2"
+                    className="bg-gray-700 hover:bg-gray-800/50 border border-gray-600 hover:border-indigo-500 text-gray-300 hover:text-indigo-400 px-3 py-1.5 rounded-lg font-medium text-sm transition-all flex items-center gap-2 cursor-pointer"
                     aria-label={`Descargar código QR del enlace: ${name}`}
                 >
-                    <DownloadIcon size={18} />
-                    QR
+                    <DownloadIcon size={20} />
+                    <span className="hidden sm:block">QR</span>
                 </button>
             </div>
         </div>

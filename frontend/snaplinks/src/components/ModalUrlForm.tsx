@@ -79,7 +79,7 @@ export default function ModalUrlForm({ isOpen, title, idProp, nameProp, original
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm" role="presentation" aria-hidden="false">
-            <div className="bg-gray-800 border border-gray-700 rounded-xl shadow-2xl w-full max-w-lg p-8 animate-fadeIn relative" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description">
+            <div className="bg-gray-800 border border-gray-700 rounded-xl shadow-2xl w-full max-w-lg py-8 px-4 sm:p-8 m-4 animate-fadeIn relative" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description">
                 <button
                     onClick={onClose}
                     className="absolute top-1 right-1 p-2 rounded-md hover:bg-red-500/10 text-gray-300 hover:text-red-400 transition-colors"

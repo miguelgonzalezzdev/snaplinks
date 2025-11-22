@@ -95,7 +95,7 @@ export default function LandingPage() {
               alt="Logo de SnapLinks"
               className="w-8 h-8 sm:w-10 sm:h-10"
             />
-            <h2 className="text-xl sm:text-2xl font-semibold text-gray-100">SnapLinks</h2>
+            <h2 className="text-xl sm:text-2xl font-semibold text-gray-100 hidden sm:block">SnapLinks</h2>
           </Link>
 
           <nav className="flex items-center gap-6 text-md" aria-label="Navegación principal">
@@ -116,7 +116,7 @@ export default function LandingPage() {
             <h1 id="hero-title" className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-100 mb-6 sm:mb-8 leading-tight tracking-tight">
               Acorta tus enlaces, <br className="hidden sm:block" /> comparte facilmente
             </h1>
-            <div id="hero-description" className="text-gray-300 text-lg sm:text-xl max-w-xl mx-auto lg:mx-0 mb-8 sm:mb-10 leading-relaxed">
+            <div id="hero-description" className="text-gray-300 text-lg sm:text-xl max-w-xl mx-auto lg:mx-0 mb-8 sm:mb-10 leading-relaxed text-left">
               <p>
                 Con <span className="text-indigo-400 font-medium">SnapLinks</span> puedes crear <span className="text-indigo-400 font-medium">enlaces cortos</span> y elegantes en segundos,
                 fáciles de compartir en cualquier plataforma.
@@ -134,7 +134,7 @@ export default function LandingPage() {
             </Link>
           </div>
 
-          <div className="flex-[0.9] w-xl bg-gray-800 border border-gray-700 rounded-2xl p-4 sm:p-8 lg:p-10 shadow-2xl" role="region" aria-labelledby="demo-form-title">
+          <div className="flex-[0.9] md:w-xl bg-gray-800 border border-gray-700 rounded-2xl p-4 sm:p-8 lg:p-10 shadow-2xl" role="region" aria-labelledby="demo-form-title">
             <h3 id="demo-form-title" className="text-2xl sm:text-3xl font-semibold mb-4 sm:mb-5 text-center">
               Acortar URL
             </h3>
@@ -169,7 +169,7 @@ export default function LandingPage() {
                 role="status"
                 aria-live="polite"
               >
-                <div className="p-6 sm:p-8 text-center flex flex-col items-center gap-5">
+                <div className="py-6 sm:py-8 px-4 sm:p-8 text-center flex flex-col items-center gap-5">
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-6 w-full">
                     <div className="shrink-0 w-32 h-32 rounded-xl overflow-hidden">
                       <img
@@ -191,14 +191,14 @@ export default function LandingPage() {
                     </div>
                   </div>
                 </div>
-                <div className="flex justify-center sm:justify-start px-8 py-4 border-t border-gray-700 gap-3 flex-wrap bg-gray-850">
+                <div className="flex justify-start px-4 md:px-8 py-4 border-t border-gray-700 gap-3 flex-wrap bg-gray-850">
                   <button
                     onClick={copyToClipboard}
                     className="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1.5 rounded-lg font-medium text-sm transition-all shadow-sm hover:shadow-md flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900"
                     aria-label={`Copiar enlace acortado: ${shortUrl + demoUrl.shortCode}`}
                   >
                     <CopyIcon size={18} aria-hidden="true" />
-                    Copiar
+                    <span className="text-sm">Copiar</span>
                   </button>
 
                   <button
@@ -207,7 +207,7 @@ export default function LandingPage() {
                     aria-label={`Compartir enlace: ${shortUrl + demoUrl.shortCode}`}
                   >
                     <ShareIcon size={18} aria-hidden="true" />
-                    Compartir
+                    <span>Compartir</span>
                   </button>
 
                   <button
@@ -216,7 +216,7 @@ export default function LandingPage() {
                     aria-label={`Descargar código QR del enlace: ${shortUrl + demoUrl.shortCode}`}
                   >
                     <DownloadIcon size={18} aria-hidden="true" />
-                    QR
+                    <span>QR</span>
                   </button>
                 </div>
               </div>
