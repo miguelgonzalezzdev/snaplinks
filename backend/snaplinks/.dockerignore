@@ -1,0 +1,48 @@
+.git
+.gitignore
+.dockerignore
+
+# Build folders
+target/
+build/
+dist/
+dist-ssr/
+out/
+node_modules/
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.nb-gradle/
+nbbuild/
+nbdist/
+nbproject/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+
+# Maven temp
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+dependency-reduced-pom.xml
+release.properties
+
+# Env
+.env
+.env*

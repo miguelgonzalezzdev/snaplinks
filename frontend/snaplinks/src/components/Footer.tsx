@@ -6,8 +6,8 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-6 py-12 flex flex-col lg:flex-row justify-between gap-8">
         <div className="flex flex-col items-center lg:items-start gap-2">
           <div className="flex items-center gap-3" aria-label="Identidad del proyecto">
-            <img src="/snaplinks-logo.png" alt="Logotipo de SnapLinks" className="w-8 h-8" />
-            <h4 className="text-gray-100 font-semibold text-lg">SnapLinks</h4>
+            <img src="/snaplinks-logo.webp" alt="Logotipo de SnapLinks" className="w-8 h-8" />
+            <h3 className="text-gray-100 font-semibold text-lg">SnapLinks</h3>
           </div>
           <p>
             Desarrollado con <span role="img" aria-label="corazón blanco">🤍</span> por{" "}
