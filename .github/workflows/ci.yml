@@ -33,10 +33,10 @@ jobs:
             ${{ runner.os }}-m2-
 
       - name: Run backend tests
-        run: mvn -B test
+        run: mvn -B clean test
 
   test-frontend:
-    name: Test Frontend (React)
+    name: Test Frontend (React & TypeScript)
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -54,7 +54,7 @@ jobs:
           cache-dependency-path: 'frontend/snaplinks/package-lock.json'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run frontend tests
         run: npm test -- --watchAll=false
